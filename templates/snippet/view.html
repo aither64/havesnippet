@@ -5,7 +5,6 @@
 
 {% block js %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.blockUI.js"></script>
-{% include "snippet/social_js.html" %}
 {% endblock %}
 
 {% block content %}
@@ -64,8 +63,6 @@
 				</div>
 				<br class="cleaner">
 			</div>
-
-			{% include "snippet/social_buttons.html" %}
 
 			<p>{% trans "Language" %}: {{ snippet.language.name }}</p>
 			<p class="tags">{% trans "Tags" %}:
