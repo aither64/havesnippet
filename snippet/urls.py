@@ -1,10 +1,9 @@
 from django.conf.urls import patterns, include, url
-from snippet.views import SnippetView, DownloadSnippetView, RawSnippetView, BrowseView, FeaturedBrowseView, MySnippetsView
+from snippet.views import SnippetView, DownloadSnippetView, RawSnippetView, BrowseView, MySnippetsView
 
 urlpatterns = patterns('snippet.views',
     url(r'^$', 'paste'),
     url(r'^browse/$', BrowseView.as_view(), name='snippet-browse'),
-    url(r'^browse/featured/$', FeaturedBrowseView.as_view(), name='snippet-browse-featured'),
     url(r'^browse/my/$', MySnippetsView.as_view(), name='snippet-browse-my'),
     url(r'^browse/bookmarks/$', 'bookmarks', name='snippet-browse-bookmarks'),
     url(r'^accounts/profile/$', 'profile'),

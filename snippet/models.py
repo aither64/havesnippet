@@ -89,7 +89,6 @@ class Snippet(models.Model):
                                       help_text=_("leave empty to keep forever"))
     rating = models.IntegerField(_('score'), default=0)
     ratings = models.ManyToManyField(User, related_name='snippet_ratings', through='SnippetRating')
-    featured = models.BooleanField(_('featured'), default=False)
 
     def __unicode__(self):
         return "{0}: {1}".format(self.slug, self.title)

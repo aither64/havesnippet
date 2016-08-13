@@ -176,11 +176,6 @@ class BrowseView(View):
         return {}
 
 
-class FeaturedBrowseView(BrowseView):
-    def queryset(self):
-        return super(FeaturedBrowseView, self).queryset().filter(featured=True).order_by('-rating', '-pub_date')
-
-
 class MySnippetsView(BrowseView):
     logged = True
 
