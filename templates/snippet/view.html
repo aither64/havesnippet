@@ -27,7 +27,12 @@
 			</p>
 
 			<p class="actions">
-				<a href="javascript:alert('FIXME!')">{% trans "Maximize" %}</a>,
+				{% if snippet_max %}
+					<a href="{% url 'snippet_view' snippet.slug %}">{% trans "Minimize" %}</a>,
+				{% else %}
+					<a href="{% url 'snippet_max' snippet.slug %}">{% trans "Maximize" %}</a>,
+				{% endif %}
+
 				<a href="{% url 'snippet_download' snippet.slug %}">{% trans "Download" %}</a>,
 				<a href="{% url 'snippet_raw' snippet.slug %}">{% trans "Raw" %}</a>,
 				<a href="{% url 'snippet_embed' snippet.slug %}">{% trans "Embed" %}</a>

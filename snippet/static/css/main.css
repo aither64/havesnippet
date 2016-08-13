@@ -104,6 +104,10 @@ body {
   margin: 0 auto;
   width: 1200px;
   z-index: 10;
+  position: relative;
+}
+#page.max {
+  width: 100%;
 }
 #content {
   padding: 20px 10px 20px 10px;
@@ -210,6 +214,9 @@ form.table td input.cancel {
 .snippet .actions a,
 .snippet .dates a {
   color: #232729;
+}
+.snippet .highlight {
+  overflow: auto;
 }
 #footer {
   height: 60px;

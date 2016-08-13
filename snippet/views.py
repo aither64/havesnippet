@@ -113,6 +113,14 @@ class EmbedSnippetView(SnippetView):
         return render(request, 'snippet/embed.html', {'snippet': snippet})
 
 
+class MaxSnippetView(SnippetView):
+    def view(self, request, snippet):
+        return render(request, 'snippet/view.html', {
+            'snippet': snippet,
+            'snippet_max': True,
+        })
+
+
 @login_required
 def profile(request):
     return render(request, 'snippet/profile.html', {
