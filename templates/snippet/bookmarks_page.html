@@ -10,11 +10,8 @@
 
 					<a href="{% url 'snippet-view' snippet.slug %}">{{ snippet.get_title }}</a>
 					<span>
-						{% trans "by" %}
 						{% if snippet.user %}
-							<a href="{% url 'snippet.views.user_profile' snippet.user.username %}">{{ snippet.user.username }}</a>
-						{% else %}
-							{{ snippet.get_author }}
+							{% trans "by" %} <a href="{% url 'snippet.views.user_profile' snippet.user.username %}">{{ snippet.user.username }}</a>
 						{% endif %} {% trans "in" %}
 						<a href="{{ self_url }}?language={{ snippet.language.pk }}">{{ snippet.language.name }}</a>
 						{% if user.is_authenticated and snippet.user == user %}

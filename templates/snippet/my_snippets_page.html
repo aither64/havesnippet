@@ -5,7 +5,6 @@
 		<h3>
 			<a href="{% url 'snippet-view' snippet.slug %}">{{ snippet.get_title }}</a>
 			<span>
-				{% trans "by" %} <a href="{{ self_url }}#">{{ snippet.get_author }}</a>,
 				<a href="{{ self_url }}?languages={{ snippet.language.name }}">{{ snippet.language.name }}</a>,
 				{{ snippet.date }},
 				<a href="{% url 'snippet.views.edit' snippet.slug %}">{% trans "edit" %}</a>,

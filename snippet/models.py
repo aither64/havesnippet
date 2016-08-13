@@ -82,7 +82,6 @@ class Snippet(models.Model):
     highlighted_content = models.TextField(_('highlighted code'))
     slug = models.SlugField(max_length=8, unique=True)
     user = models.ForeignKey(User, blank=True, null=True)
-    nick = models.CharField(_('nick'), max_length=30, blank=True)
     pub_date = models.DateTimeField(_('publish date'), auto_now_add=True)
     update_date = models.DateTimeField(_('updated'), auto_now=True)
     accessibility = models.SmallIntegerField(_('accessibility'), choices=ACCESSIBILITY, default=1)
@@ -120,12 +119,6 @@ class Snippet(models.Model):
 
     def get_title(self):
         return self.title if len(self.title) else _("Untitled")
-
-    def get_author(self):
-        if self.user:
-            return self.user
-
-        return self.nick if len(self.nick) else _("anonymouse")
 
     def get_absolute_url(self):
         return reverse('snippet-view', kwargs={'code': self.slug})

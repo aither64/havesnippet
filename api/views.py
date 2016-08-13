@@ -177,9 +177,7 @@ class ViewView(BaseView):
             'title': self.snippet.title,
             'language': self.snippet.language.language_code,
             'code': self.snippet.content,
-            'author': self.snippet.get_author(),
             'date': self.snippet.date,
-            'tags': [t.name for t in self.snippet.tags.all()],
         }))
 
     def plain(self):

@@ -12,8 +12,7 @@ class SnippetForm(forms.ModelForm):
 
     class Meta:
         model = Snippet
-        fields = ['nick', 'title', 'language', 'content', 'accessibility',
-                 'expiration']
+        fields = ['title', 'language', 'content', 'accessibility', 'expiration']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': _('My cool snippet')}),
             'content': forms.Textarea(attrs={'placeholder': _('Paste code here')}),
@@ -25,7 +24,6 @@ class SnippetForm(forms.ModelForm):
 
         if user.is_authenticated():
             self.instance.user = user
-            del self.fields['nick']
 
         self.fields['expiration'].initial = now() + timedelta(minutes=30)
 

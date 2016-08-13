@@ -28,7 +28,9 @@
 
 				{{ snippet.title }}
 
-				<span class="author">{% trans "by" %} <a href="#">{{ snippet.get_author }}</a></span>
+				{% if snippet.user %}
+					<span class="author">{% trans "by" %} <a href="#">{{ snippet.user }}</a></span>
+				{% endif %}
 			</h2>
 
 			<p class="dates">
