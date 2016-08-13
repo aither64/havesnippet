@@ -65,11 +65,6 @@
 			</div>
 
 			<p>{% trans "Language" %}: {{ snippet.language.name }}</p>
-			<p class="tags">{% trans "Tags" %}:
-				{% for tag in snippet.tags.all %}
-					<a href="#">{{ tag.name }}</a>,
-				{% endfor %}
-			</p>
 		</div>
 		<br class="cleaner">
 	</div>

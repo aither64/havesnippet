@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from django.forms import widgets
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-from taggit.forms import TagField
-from taggit_autosuggest.widgets import TagAutoSuggest
 from models import Snippet, Language, Bookmark
 
 
@@ -14,7 +12,7 @@ class SnippetForm(forms.ModelForm):
 
     class Meta:
         model = Snippet
-        fields = ['nick', 'title', 'language', 'content', 'tags', 'accessibility',
+        fields = ['nick', 'title', 'language', 'content', 'accessibility',
                  'expiration']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': _('My cool snippet')}),
@@ -52,7 +50,6 @@ class FilterForm(forms.Form):
     users = forms.CharField(label=_('Users'), max_length=255, required=False)
     language = forms.ModelMultipleChoiceField(label=_('Language'), queryset=Language.objects.exclude(slug='autodetect'),
                                               required=False)
-    tags = TagField(widget=TagAutoSuggest(), required=False)
     content = forms.CharField(label=_('Code'), max_length=255, required=False, widget=forms.Textarea())
     order_by = forms.ChoiceField(label=_('Ordering'), choices=ORDER_BY, initial=ORDER_BY[0][0], required=False)
     show_code = forms.BooleanField(label=_('Show code'), initial=False, required=False)
@@ -66,7 +63,7 @@ class FilterForm(forms.Form):
         return data
 
     def advanced_fields(self):
-        return [self[field] for field in ['title', 'users', 'language', 'tags', 'content']]
+        return [self[field] for field in ['title', 'users', 'language', 'content']]
 
     def basic_fields(self):
         return [self['order_by'], self['show_code']]
@@ -80,9 +77,6 @@ class FilterForm(forms.Form):
 
         if self._filter_by('language'):
             qs = qs.filter(language__in=self.cleaned_data['language'])
-
-        if self._filter_by('tags'):
-            qs = qs.filter(tags__name__in=self.cleaned_data['tags'])
 
         if self._filter_by('content'):
             qs = qs.filter(content__contains=self.cleaned_data['content'])

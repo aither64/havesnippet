@@ -219,9 +219,6 @@ form.table td input.cancel {
 .snippet .snippet-metadata .rating .plus {
   background-color: darkred;
 }
-.snippet .snippet-metadata .tags a {
-  color: #00628B;
-}
 .snippet .rating-only {
   width: 75px;
 }

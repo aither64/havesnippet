@@ -9,8 +9,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'HaveSnippet.views.home', name='home'),
     # url(r'^HaveSnippet/', include('HaveSnippet.foo.urls')),
 
-    # url(r'', include('taggit_live.urls')),
-    url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
 
     url(r'^api/', include('api.urls')),

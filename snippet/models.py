@@ -8,7 +8,6 @@ from pygments.formatters.html import HtmlFormatter
 from pygments.lexers import get_lexer_by_name, guess_lexer_for_filename, get_lexer_for_filename
 from pygments.lexers import guess_lexer
 import pygments.util
-from taggit_autosuggest.managers import TaggableManager
 from snippet.utils import gen_string
 
 
@@ -92,8 +91,6 @@ class Snippet(models.Model):
     rating = models.IntegerField(_('score'), default=0)
     ratings = models.ManyToManyField(User, related_name='snippet_ratings', through='SnippetRating')
     featured = models.BooleanField(_('featured'), default=False)
-
-    tags = TaggableManager(blank=True)
 
     def __unicode__(self):
         return "{0}: {1}".format(self.slug, self.title)
