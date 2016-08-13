@@ -65,9 +65,6 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'k%%1p&amp;l9-kw6sy!p66wxk)5=mp+_f96q(a3iwc8_h0p1+n0r$s'
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
