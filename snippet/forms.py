@@ -30,6 +30,8 @@ class SnippetForm(forms.ModelForm):
 
         if user.is_authenticated():
             self.instance.user = user
+        else:
+            self.fields['accessibility'].choices = self.fields['accessibility'].choices[0:2]
 
         self.fields['expiration'].initial = now() + timedelta(minutes=30)
 

@@ -98,7 +98,7 @@ class PasteView(BaseView):
         self.paste = (None, None)
 
     def prepare(self, params):
-        form = SnippetForm(params)
+        form = SnippetForm(self.user, params)
 
         if form.is_valid():
             form.instance.user = self.user

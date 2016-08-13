@@ -40,20 +40,35 @@ class ApiForm(forms.Form):
         return data
 
     def accept(self):
-        AuthKey.objects.filter(pk=self.auth_key.pk).update(last_use=now(), use_count=F('use_count') + 1)
+        AuthKey.objects.filter(pk=self.auth_key.pk).update(
+            last_use=timezone.now(),
+            use_count=F('use_count') + 1
+        )
 
 
 class SnippetForm(forms.ModelForm):
     language = forms.CharField(max_length=50, required=False)
     expiration = forms.IntegerField(min_value=0, required=False)
     accessibility = forms.IntegerField(
-        min_value=0, max_value=len(ACCESSIBILITY)-1,
+        min_value=0, max_value=(len(ACCESSIBILITY)-1),
         required=False
     )
 
     class Meta:
         model = Snippet
         fields = ['title', 'file_name', 'language', 'content', 'accessibility', 'expiration']
+
+    def __init__(self, user, *args, **kwargs):
+        super(SnippetForm, self).__init__(*args, **kwargs)
+        self.user = user
+
+    def clean_accessibility(self):
+        access = self.cleaned_data.get("accessibility")
+
+        if not self.user and access > 1:
+            raise forms.ValidationError('accessibility must be 0 or 1')
+
+        return access
 
     def clean_expiration(self):
         expire = self.cleaned_data.get("expiration")
