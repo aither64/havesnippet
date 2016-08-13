@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n comments %}
+{% load i18n %}
 
 {% block title %}{{ snippet.title }} | {{ block.super }}{% endblock %}
 
@@ -78,30 +78,6 @@
 		<div class="highlight">
 			{{ snippet.highlighted_content|safe }}
 		</div>
-	</div>
-	<hr>
-	<div class="comments">
-		<h3>{% trans "Comments" %}</h3>
-		{% render_comment_list for snippet %}
-		<hr>
-		{% if user.is_authenticated %}
-			{% get_comment_form for snippet as form %}
-
-		    <form action="{% comment_form_target %}" method="POST">
-			    {% csrf_token %}
-			    {{ form.comment }}
-			    {{ form.honeypot }}
-			    {{ form.content_type }}
-			    {{ form.object_pk }}
-			    {{ form.timestamp }}
-			    {{ form.security_hash }}
-
-			    <input type="hidden" name="next" value="{{ snippet.get_absolute_url }}">
-			    <input type="submit" value="{% trans "Post" %}" id="id_submit">
-		    </form>
-		{% else %}
-		    <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
-		{% endif %}
 	</div>
 </div>
 {% endblock %}

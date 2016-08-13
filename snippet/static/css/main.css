@@ -6,8 +6,8 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 .stripe {
-  background-color: #00628b;
-  border-bottom: 5px solid #81a594;
+  background-color: #00628B;
+  border-bottom: 5px solid #81A594;
   height: 90px;
   text-align: center;
 }
@@ -23,11 +23,11 @@ body {
   font-weight: normal;
 }
 .header h1 a {
-  color: #e6e6dc;
+  color: #E6E6DC;
   text-decoration: none;
 }
 .header h1 a span {
-  color: #81a594;
+  color: #81A594;
 }
 .header div {
   width: 980px;
@@ -48,7 +48,7 @@ body {
   margin: 0 10px 0 10px;
 }
 .header div #menu li a {
-  color: #e6e6dc;
+  color: #E6E6DC;
   text-decoration: none;
 }
 .header div #login-box {
@@ -72,7 +72,7 @@ body {
   padding: 5px 0 0 0;
 }
 .header div #login-box .button.login {
-  background-color: #e6e6dc;
+  background-color: #E6E6DC;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -80,10 +80,10 @@ body {
   border-radius: 5px;
 }
 .header div #login-box .button.login a {
-  color: #00628b;
+  color: #00628B;
 }
 .header div #login-box .button.register {
-  background-color: #81a594;
+  background-color: #81A594;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -91,13 +91,13 @@ body {
   border-radius: 5px;
 }
 .header div #login-box .button.register a {
-  color: #e6e6dc;
+  color: #E6E6DC;
 }
 .header div #login-box .link {
   padding-top: 4px;
 }
 .header div #login-box .link a {
-  color: #e6e6dc;
+  color: #E6E6DC;
 }
 #page {
   text-align: left;
@@ -136,7 +136,7 @@ form.table td input.cancel,
 form.table td .button {
   width: auto;
   border: none;
-  color: #e6e6dc;
+  color: #E6E6DC;
   padding: 6px 40px 6px 40px;
   font-size: 16px;
   -webkit-border-radius: 5px;
@@ -146,11 +146,11 @@ form.table td .button {
   border-radius: 5px;
 }
 form.table td input[type="submit"] {
-  background-color: #00628b;
+  background-color: #00628B;
 }
 form.table td input[type="reset"],
 form.table td input.cancel {
-  background-color: #81a594;
+  background-color: #81A594;
 }
 #snippet-form textarea {
   width: 100%;
@@ -179,7 +179,7 @@ form.table td input.cancel {
   float: left;
 }
 .snippet .snippet-header .snippet-title h2 {
-  color: #00628b;
+  color: #00628B;
   font-size: 24px;
   font-weight: normal;
   margin: 10px 0 0 0;
@@ -211,16 +211,16 @@ form.table td input.cancel {
   float: left;
   text-decoration: none;
   padding: 0 8px 0 8px;
-  color: #e6e6dc;
+  color: #E6E6DC;
 }
 .snippet .snippet-metadata .rating .minus {
-  background-color: #00628b;
+  background-color: #00628B;
 }
 .snippet .snippet-metadata .rating .plus {
   background-color: darkred;
 }
 .snippet .snippet-metadata .tags a {
-  color: #00628b;
+  color: #00628B;
 }
 .snippet .rating-only {
   width: 75px;
@@ -232,33 +232,6 @@ form.table td input.cancel {
 .snippet .dates a {
   color: #232729;
 }
-.snippet .comments h3 {
-  font-size: 24px;
-  font-weight: normal;
-}
-.snippet .comments textarea {
-  width: 500px;
-  height: 60px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  float: left;
-}
-.snippet .comments input[type="submit"] {
-  width: 66px;
-  height: 66px;
-  border: none;
-  background-color: #00628b;
-  color: #e6e6dc;
-  margin-left: 6px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-}
 #footer {
   height: 60px;
   text-align: center;
@@ -267,13 +240,13 @@ form.table td input.cancel {
 #footer p {
   width: 1200px;
   text-align: right;
-  background-color: #00628b;
-  color: #e6e6dc;
+  background-color: #00628B;
+  color: #E6E6DC;
   padding: 20px 0 0 0;
   margin: 0 auto;
 }
 #footer a {
-  color: #e6e6dc;
+  color: #E6E6DC;
 }
 #footer:hover {
   text-decoration: none;
@@ -321,7 +294,7 @@ form.table td input.cancel {
   font-weight: normal;
 }
 .browse h3 a {
-  color: #00628b;
+  color: #00628B;
   text-decoration: none;
 }
 .browse h3 a:hover {

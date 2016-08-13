@@ -12,7 +12,6 @@ urlpatterns = patterns('',
     # url(r'', include('taggit_live.urls')),
     url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^comments/', include('django_comments.urls')),
 
     url(r'^api/', include('api.urls')),
 

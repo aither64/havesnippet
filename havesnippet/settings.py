@@ -132,7 +132,6 @@ INSTALLED_APPS = (
     'taggit_autosuggest',
     'endless_pagination',
     'registration',
-    'django_comments',
     'snippet',
     'api',
 )
