@@ -3,14 +3,6 @@
 
 {% block title %}{% trans "New paste" %} | {{ block.super }}{% endblock %}
 
-{% block css %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.ezdz.css">
-{% endblock %}
-
-{% block js %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ezdz.min.js"></script>
-{% endblock %}
-
 {% block content %}
 <form action="{% url 'snippet.views.paste' %}" method="post" id="snippet-form" class="table">
 	{% csrf_token %}

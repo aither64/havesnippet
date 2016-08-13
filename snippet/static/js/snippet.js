@@ -10,10 +10,6 @@
 		if(!form.length)
 			return;
 
-		// Drop file to textarea
-		if(supportsFileApi())
-			setupFileDrop(form);
-
 		// Expiration slider
 		var td = $("#id_expiration").parent();
 		td.find("*").hide();
@@ -60,31 +56,6 @@
 		});
 	}
 
-	function setupFileDrop(form) {
-		var tr = form.find("#id_content").parent().parent();
-		var td = tr.find(".file");
-
-		$("<input>")
-			.attr("type", "file")
-			.attr("name", "file")
-			.attr("accept", "text/*")
-			.appendTo(td)
-			.ezdz({
-                text: "or drop a file here",
-			    accept: handleFileDrop
-            });
-	}
-
-	function handleFileDrop(file) {
-		var reader = new FileReader();
-
-		reader.onload = (function(e){
-			$("#id_content").text(e.target.result);
-		});
-
-		reader.readAsText(file);
-	}
-
 	function hideAdvancedFilters() {
 		var fields = $(".filters .advanced");
 
@@ -110,9 +81,5 @@
 			+ " " + ("0" + d.getHours().toString()).slice(-2)
 			+ ":" + ("0" + d.getMinutes().toString()).slice(-2)
 			+ ":" + ("0" + d.getSeconds().toString()).slice(-2);
-	}
-
-	function supportsFileApi() {
-		return window.File && window.FileReader && window.FileList && window.Blob;
 	}
 }(jQuery));

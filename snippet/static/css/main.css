@@ -152,9 +152,12 @@ form.table td input[type="reset"],
 form.table td input.cancel {
   background-color: #81A594;
 }
+#snippet-form table {
+  width: 90%;
+}
 #snippet-form textarea {
   width: 100%;
-  height: 100%;
+  height: 400px;
 }
 #snippet-form td.file {
   padding-left: 20px;
