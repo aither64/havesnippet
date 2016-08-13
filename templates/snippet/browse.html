@@ -13,15 +13,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.endlessPaginate({
-            paginateOnScroll: true,
-			onCompleted: function(context, fragment) {
-                ajaxBookmark();
-
-				FB.XFBML.parse(document.body);
-				gapi.plus.go(document.body);
-				twttr.widgets.load();
-            }
-        });
+			paginateOnScroll: true,
+    });
 	});
 </script>
 

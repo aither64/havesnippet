@@ -12,20 +12,6 @@
 	<div class="snippet-header">
 		<div class="snippet-title">
 			<h2>
-				{% if user.is_authenticated %}
-					{% spaceless %}
-						{% if snippet in user_bookmarks %}
-							<a class="unbookmark" href="{% url 'snippet.views.bookmark_snippet_delete' snippet.slug %}" title="{% trans "Delete bookmark" %}">
-								<img src="{{ STATIC_URL }}img/star_full.png" alt="{% trans "Delete bookmark" %}">
-							</a>
-						{% else %}
-							<a class="bookmark" href="{% url 'snippet.views.bookmark_snippet' snippet.slug %}" title="{% trans "Bookmark" %}">
-								<img src="{{ STATIC_URL }}img/star_empty.png" alt="{% trans "Bookmark" %}">
-							</a>
-						{% endif %}
-					{% endspaceless %}
-				{% endif %}
-
 				{{ snippet.title }}
 
 				{% if snippet.user %}

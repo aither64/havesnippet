@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Snippet, Language, Bookmark
+from models import Snippet, Language
 
 
 class LanguageAdmin(admin.ModelAdmin):
@@ -15,9 +15,3 @@ class SnippetAdmin(admin.ModelAdmin):
     search_fields = ('title',)
 
 admin.site.register(Snippet, SnippetAdmin)
-
-
-class BookmarkAdmin(admin.ModelAdmin):
-    list_display = ('owner', 'snippet', 'user', 'follow')
-
-admin.site.register(Bookmark, BookmarkAdmin)

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.forms import widgets
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-from models import Snippet, Language, Bookmark
+from models import Snippet, Language
 
 
 class SnippetForm(forms.ModelForm):
@@ -90,12 +90,3 @@ class FilterForm(forms.Form):
 
     def _filter_by(self, k):
         return k in self.cleaned_data and len(self.cleaned_data[k])
-
-
-class BookmarkForm(forms.ModelForm):
-    next = forms.CharField(max_length=1000, widget=widgets.HiddenInput)
-
-    class Meta:
-        model = Bookmark
-        fields = ['next', 'follow']
-

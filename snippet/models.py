@@ -123,17 +123,3 @@ class Snippet(models.Model):
     @staticmethod
     def generate_slug():
         return gen_string(size=8)
-
-
-class Bookmark(models.Model):
-    owner = models.ForeignKey(User, related_name='bookmark_owner')
-    snippet = models.ForeignKey(Snippet, related_name='bookmarked_snippet', blank=True, null=True)
-    user = models.ForeignKey(User, related_name='bookmarked_user', blank=True, null=True)
-    follow = models.BooleanField(_('follow'), default=True)
-
-    class Meta:
-        unique_together = (('owner', 'snippet'), ('owner', 'user'))
-
-    def __unicode__(self):
-        return "{0}: {1}".format(self.owner, self.snippet)
-

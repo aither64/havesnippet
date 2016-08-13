@@ -2,9 +2,6 @@
 	$(document).ready(function(){
 		setupSnippetForm();
 		hideAdvancedFilters();
-		ajaxBookmark();
-
-		window.ajaxBookmark = ajaxBookmark;
 	});
 
 	function setupSnippetForm() {
@@ -104,58 +101,6 @@
 				e.preventDefault();
 			})
 		);
-	}
-
-	function ajaxBookmark() {
-		$(".snippet .bookmark").click(function(event){
-			var bookmark = this;
-
-			$.blockUI({ message: "<p>Remote call in progress...</p>" });
-
-			$.ajax({
-				url: this.href,
-				cache: false
-			}).done(function(data) {
-				$.blockUI({
-		            message: data
-	            });
-
-                $(".bookmark-form input[type='submit']").parent().append(
-                    $("<a>").attr("href", "#close").text("Cancel").click(function(event){
-	                    $.unblockUI();
-
-	                    event.preventDefault();
-                    })
-                );
-
-                $(".bookmark-form").submit(function(event){
-	                var dataString = "next=nowhere&csrfmiddlewaretoken=" + $(this).find("input[name='csrfmiddlewaretoken']").attr("value");
-	                var follow = $(this).find("input[name='follow']");
-
-	                if(follow.attr("checked"))
-	                    dataString += "&follow=" + follow.attr("value");
-
-	                $.blockUI({ message: "<p>Remote call in progress...</p>" });
-
-	                $.ajax({
-		                url: this.action,
-		                type: "POST",
-		                data: dataString
-                    }).done(function(data) {
-                        $.blockUI({ message: (data == "OK" ? "<p>Bookmark saved.</p>" : "<p>Error occured</p>") });
-                        setTimeout($.unblockUI, 1000);
-
-                        if(data == "OK") {
-	                       $(bookmark).replaceWith($("<img>").attr("src", "/static/img/star_full.png"))
-                        }
-                    });
-
-	                event.preventDefault();
-                });
-			});
-
-			event.preventDefault();
-		});
 	}
 
 	function formatDate(d) {

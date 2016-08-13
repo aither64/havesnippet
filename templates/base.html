@@ -32,9 +32,6 @@
 						{% if user.is_authenticated %}
 							<li><a href="{% url 'snippet-browse-my' %}">{% trans "My snippets" %}</a></li>
 						{% endif %}
-						{% if user.is_authenticated %}
-							<li><a href="{% url 'snippet-browse-bookmarks' %}">{% trans "Bookmarks" %}</a></li>
-						{% endif %}
 						<li><a href="{% url 'snippet-browse' %}">{% trans "Browse" %}</a></li>
 						<li><a href="{% url 'api.views.about' %}">{% trans "API" %}</a></li>
 					</ul>
