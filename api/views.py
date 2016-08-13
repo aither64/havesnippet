@@ -175,8 +175,6 @@ class ViewView(BaseView):
     def json(self):
         return HttpResponse(json.dumps({
             'title': self.snippet.title,
-            'short_description': self.snippet.short_description,
-            'full_description': self.snippet.full_description,
             'language': self.snippet.language.language_code,
             'code': self.snippet.content,
             'author': self.snippet.get_author(),

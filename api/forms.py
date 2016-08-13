@@ -50,8 +50,8 @@ class SnippetForm(forms.ModelForm):
 
     class Meta:
         model = Snippet
-        fields = ['title', 'short_description', 'full_description', 'language',
-                  'content', 'accessibility', 'expiration', 'tags', 'nick']
+        fields = ['title', 'language', 'content', 'accessibility', 'expiration',
+                  'tags', 'nick']
 
     def clean_language(self):
         lang = self.cleaned_data["language"]

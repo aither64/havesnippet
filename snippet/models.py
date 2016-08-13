@@ -78,9 +78,6 @@ class Snippet(models.Model):
     PRIVATE = 3
 
     title = models.CharField(_('title'), max_length=255, blank=True)
-    short_description = models.CharField(_('short description'), max_length=150, blank=True)
-    full_description = models.TextField(_('description'), blank=True)
-    formatted_full_description = models.TextField(_('formatted description'))
     language = models.ForeignKey(Language)
     content = models.TextField(_('code'))
     highlighted_content = models.TextField(_('highlighted code'))
@@ -111,8 +108,6 @@ class Snippet(models.Model):
         lexer = get_lexer_by_name(self.language.language_code)
         formatter = HtmlFormatter(linenos=True)
         self.highlighted_content = highlight(self.content, lexer, formatter)
-
-        self.formatted_full_description = markdown(self.full_description)
 
         if is_new:
             while True:

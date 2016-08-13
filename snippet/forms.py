@@ -14,13 +14,11 @@ class SnippetForm(forms.ModelForm):
 
     class Meta:
         model = Snippet
-        fields = ['nick', 'title', 'short_description', 'language', 'content',
-                  'full_description', 'tags', 'accessibility', 'expiration']
+        fields = ['nick', 'title', 'language', 'content', 'tags', 'accessibility',
+                 'expiration']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': _('My cool snippet')}),
-            'short_description': forms.TextInput(attrs={'placeholder': _('Showed in browse, max 150 chars')}),
             'content': forms.Textarea(attrs={'placeholder': _('Paste code here')}),
-            'full_description': forms.Textarea(attrs={'placeholder': _('Showed in snippet details, formatted in markdown')}),
             'accessibility': forms.RadioSelect(),
         }
 
