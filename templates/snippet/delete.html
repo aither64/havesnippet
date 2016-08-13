@@ -1,0 +1,14 @@
+{% extends "snippet/view.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete snippet" %} | {{ block.super }}{% endblock %}
+
+{% block content %}
+<form action="{% url 'snippet.views.delete_confirm' snippet.slug %}" method="get">
+	<p>{% trans "Do you really want to delete this snippet?" %}</p>
+	<input type="submit" value="{% trans "Delete" %}">
+	<a href="{% url 'snippet-view' snippet.slug %}">{% trans "cancel" %}</a>
+</form>
+
+{{ block.super }}
+{% endblock %}

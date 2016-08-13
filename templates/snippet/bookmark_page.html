@@ -1,0 +1,12 @@
+{% load i18n %}
+<h2>{%  trans "Add bookmark" %}</h2>
+
+<form class="bookmark-form" action="{% url 'snippet.views.bookmark_snippet' snippet.slug %}" method="post">
+	{% csrf_token %}
+	<table>
+		{{ form }}
+		<tr>
+			<td colspan="2"><input type="submit" value="Add"></td>
+		</tr>
+	</table>
+</form>

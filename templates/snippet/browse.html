@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n endless %}
+
+{% block title %}Browse | {{ block.super }}{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+
+{% if show_code %}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.blockUI.js"></script>
+{% endif %}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.endlessPaginate({
+            paginateOnScroll: true,
+			onCompleted: function(context, fragment) {
+                ajaxBookmark();
+				ajaxRating();
+
+				FB.XFBML.parse(document.body);
+				gapi.plus.go(document.body);
+				twttr.widgets.load();
+            }
+        });
+	});
+</script>
+
+{% include "snippet/social_js.html" %}
+
+{% endblock %}
+
+{% block content %}
+<form class="filters table" action="{{ self_url }}" method="get">
+	<table>
+		<tr>
+			<td class="label">{{ form.order_by.label }}</td>
+			<td>{{ form.order_by }}</td>
+			<td class="label">{{ form.show_code.label }}</td>
+			<td>{{ form.show_code }}</td>
+			<td colspan="2" class="submit"><input type="submit" value="{% trans "Apply" %}"></td>
+		</tr>
+		<tr class="advanced">
+			<td class="label">{{ form.title.label }}</td>
+			<td>{{ form.title }}</td>
+			<td rowspan="3" class="label">{{ form.language.label }}</td>
+			<td rowspan="3">{{ form.language }}</td>
+			<td rowspan="3" class="label">{{ form.content.label }}</td>
+			<td rowspan="3">{{ form.content }}</td>
+		</tr>
+		<tr class="advanced">
+			<td class="label">{{ form.users.label }}</td>
+			<td>{{ form.users }}</td>
+		</tr>
+		<tr class="advanced">
+			<td class="label">{{ form.tags.label }}</td>
+			<td>{{ form.tags }}</td>
+		</tr>
+	</table>
+</form>
+<hr>
+<div class="endless_page_template browse">
+	{% include template_page %}
+</div>
+
+{% endblock %}

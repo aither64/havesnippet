@@ -1,0 +1,114 @@
+from datetime import timedelta
+from django import forms
+from django.contrib.auth.models import User
+from django.forms import widgets
+from django.utils.timezone import now
+from django.utils.translation import ugettext_lazy as _
+from taggit.forms import TagField
+from taggit_autosuggest.widgets import TagAutoSuggest
+from models import Snippet, Language, Bookmark
+
+
+class SnippetForm(forms.ModelForm):
+    language = forms.ModelChoiceField(label=_("Language"), queryset=Language.objects.all(), initial="autodetect")
+
+    class Meta:
+        model = Snippet
+        fields = ['nick', 'title', 'short_description', 'language', 'content',
+                  'full_description', 'tags', 'accessibility', 'expiration']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': _('My cool snippet')}),
+            'short_description': forms.TextInput(attrs={'placeholder': _('Showed in browse, max 150 chars')}),
+            'content': forms.Textarea(attrs={'placeholder': _('Paste code here')}),
+            'full_description': forms.Textarea(attrs={'placeholder': _('Showed in snippet details, formatted in markdown')}),
+            'accessibility': forms.RadioSelect(),
+        }
+
+    def __init__(self, user, *args, **kwargs):
+        super(SnippetForm, self).__init__(*args, **kwargs)
+
+        if user.is_authenticated():
+            self.instance.user = user
+            del self.fields['nick']
+
+        self.fields['expiration'].initial = now() + timedelta(minutes=30)
+
+    def clean(self):
+        data = self.cleaned_data
+
+        if data["language"].language_code == "autodetect" and "content" in data:
+            data["language"] = Language.guess_language(text=data["content"])
+
+        return data
+
+
+ORDER_BY = (
+    ('latest', _('Latest')),
+    ('highest-rated', _('Highest rated')),
+    ('oldest', _('Oldest')),
+)
+
+
+class FilterForm(forms.Form):
+    title = forms.CharField(label=_('Title'), max_length=255, required=False)
+    users = forms.CharField(label=_('Users'), max_length=255, required=False)
+    language = forms.ModelMultipleChoiceField(label=_('Language'), queryset=Language.objects.exclude(slug='autodetect'),
+                                              required=False)
+    tags = TagField(widget=TagAutoSuggest(), required=False)
+    content = forms.CharField(label=_('Code'), max_length=255, required=False, widget=forms.Textarea())
+    order_by = forms.ChoiceField(label=_('Ordering'), choices=ORDER_BY, initial=ORDER_BY[0][0], required=False)
+    show_code = forms.BooleanField(label=_('Show code'), initial=False, required=False)
+
+    def clean(self):
+        data = self.cleaned_data
+
+        if self._filter_by('users'):
+            data['users'] = [u.strip() for u in data['users'].split(',')]
+
+        return data
+
+    def advanced_fields(self):
+        return [self[field] for field in ['title', 'users', 'language', 'tags', 'content']]
+
+    def basic_fields(self):
+        return [self['order_by'], self['show_code']]
+
+    def apply_filters(self, qs):
+        if self._filter_by('title'):
+            qs = qs.filter(title__contains=self.cleaned_data['title'])
+
+        if self._filter_by('users'):
+            qs = qs.filter(user__in=User.objects.filter(username__in=self.cleaned_data['users']))
+
+        if self._filter_by('language'):
+            qs = qs.filter(language__in=self.cleaned_data['language'])
+
+        if self._filter_by('tags'):
+            qs = qs.filter(tags__name__in=self.cleaned_data['tags'])
+
+        if self._filter_by('content'):
+            qs = qs.filter(content__contains=self.cleaned_data['content'])
+
+        if self._filter_by('order_by'):
+            if self.cleaned_data['order_by'] == 'latest':
+                qs = qs.order_by('-pub_date', '-id')
+            elif self.cleaned_data['order_by'] == 'highest-rated':
+                qs = qs.order_by('-rating', '-pub_date', '-id')
+            else:
+                qs = qs.order_by('id')
+        else:
+            qs = qs.order_by('-pub_date', '-id')
+
+        return qs
+
+    def _filter_by(self, k):
+        return k in self.cleaned_data and len(self.cleaned_data[k])
+
+
+class BookmarkForm(forms.ModelForm):
+    next = forms.CharField(max_length=1000, widget=widgets.HiddenInput)
+
+    class Meta:
+        model = Bookmark
+        fields = ['next', 'follow']
+

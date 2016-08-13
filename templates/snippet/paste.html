@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "New paste" %} | {{ block.super }}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.ezdz.css">
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ezdz.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'snippet.views.paste' %}" method="post" id="snippet-form" class="table">
+	{% csrf_token %}
+	<table>
+		<tr>
+			<td class="label"><label for="id_title">{{ form.title.label }}</label></td>
+			<td>{{ form.title.errors }}{{ form.title }}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="label"><label for="id_short_description">{{ form.short_description.label }}</label></td>
+			<td>{{ form.short_description.errors }}{{ form.short_description }}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="label"><label for="id_language">{{ form.language.label }}</label></td>
+			<td>{{ form.language.errors }}{{ form.language }}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="label"><label for="id_code">{{ form.content.label }}</label></td>
+			<td>{{ form.content.errors }}{{ form.content }}</td>
+			<td class="file"></td>
+		</tr>
+		<tr>
+			<td class="label"><label for="id_full_description">{{ form.full_description.label }}</label></td>
+			<td colspan="2">{{ form.full_description.errors }}{{ form.full_description }}</td>
+		</tr>
+		<tr>
+			<td class="label"><label for="id_tags">{{ form.tags.label }}</label></td>
+			<td colspan="2">{{ form.tags.errors }}{{ form.tags }}</td>
+		</tr>
+		<tr>
+			<td class="label"><label for="id_accessibility">{{ form.accessibility.label }}</label></td>
+			<td colspan="2">{{ form.accessibility.errors }}{{ form.accessibility }}</td>
+		</tr>
+		<tr>
+			<td class="label"><label for="id_expiration">{{ form.expiration.label }}</label></td>
+			<td colspan="2">{{ form.expiration.errors }}{{ form.expiration }}</td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td>
+				<input type="submit" value="{% trans "Paste" %}">
+				<input type="reset" value="{% trans "Reset" %}">
+			</td>
+		</tr>
+	</table>
+</form>
+{% endblock %}

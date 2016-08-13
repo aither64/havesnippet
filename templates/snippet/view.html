@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load i18n comments %}
+
+{% block title %}{{ snippet.title }} | {{ block.super }}{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.blockUI.js"></script>
+{% include "snippet/social_js.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="snippet">
+	<div class="snippet-header">
+		<div class="snippet-title">
+			<h2>
+				{% if user.is_authenticated %}
+					{% spaceless %}
+						{% if snippet in user_bookmarks %}
+							<a class="unbookmark" href="{% url 'snippet.views.bookmark_snippet_delete' snippet.slug %}" title="{% trans "Delete bookmark" %}">
+								<img src="{{ STATIC_URL }}img/star_full.png" alt="{% trans "Delete bookmark" %}">
+							</a>
+						{% else %}
+							<a class="bookmark" href="{% url 'snippet.views.bookmark_snippet' snippet.slug %}" title="{% trans "Bookmark" %}">
+								<img src="{{ STATIC_URL }}img/star_empty.png" alt="{% trans "Bookmark" %}">
+							</a>
+						{% endif %}
+					{% endspaceless %}
+				{% endif %}
+
+				{{ snippet.title }}
+
+				<span class="author">{% trans "by" %} <a href="#">{{ snippet.get_author }}</a></span>
+			</h2>
+
+			<p class="dates">
+				{{ snippet.pub_date }}
+				{% if snippet.update_date > snippet.pub_date %}
+				, {% trans "updated" %} {{ snippet.update_date }}
+				{% endif %}
+				{% if user.is_authenticated and snippet.user == user %}
+					, <a href="{% url 'snippet.views.edit' snippet.slug %}">{% trans "edit" %}</a>,
+					<a href="{% url 'snippet.views.delete' snippet.slug %}">{% trans "delete" %}</a>
+				{% endif %}
+			</p>
+
+			<p class="actions">
+				<a href="javascript:alert('FIXME!')">{% trans "Maximize" %}</a>,
+				<a href="{% url 'snippet-download' snippet.slug %}">{% trans "Download" %}</a>,
+				<a href="{% url 'snippet-raw' snippet.slug %}">{% trans "Raw" %}</a>,
+				<a href="javascript:alert('FIXME!')">{% trans "Embed" %}</a>
+			</p>
+		</div>
+		<div class="snippet-metadata">
+			<div class="score-outer">
+				<div class="score-inner">
+					<p class="value">{{ snippet.rating }}</p>
+					{% if user.is_authenticated and snippet not in user_ratings %}
+						<p class="rating">
+							<a class="minus" href="{% url 'rate-dislike' snippet.slug %}">-</a>
+							<a class="plus" href="{% url 'rate-like' snippet.slug %}">+</a>
+						</p>
+					{% endif %}
+					<br class="cleaner">
+				</div>
+				<br class="cleaner">
+			</div>
+
+			{% include "snippet/social_buttons.html" %}
+
+			<p>{% trans "Language" %}: {{ snippet.language.name }}</p>
+			<p class="tags">{% trans "Tags" %}:
+				{% for tag in snippet.tags.all %}
+					<a href="#">{{ tag.name }}</a>,
+				{% endfor %}
+			</p>
+		</div>
+		<br class="cleaner">
+	</div>
+
+	<div class="content">
+		<div class="highlight">
+			{{ snippet.highlighted_content|safe }}
+		</div>
+
+		<div id="full_description">
+			{{ snippet.formatted_full_description|safe }}
+		</div>
+	</div>
+	<hr>
+	<div class="comments">
+		<h3>{% trans "Comments" %}</h3>
+		{% render_comment_list for snippet %}
+		<hr>
+		{% if user.is_authenticated %}
+			{% get_comment_form for snippet as form %}
+
+		    <form action="{% comment_form_target %}" method="POST">
+			    {% csrf_token %}
+			    {{ form.comment }}
+			    {{ form.honeypot }}
+			    {{ form.content_type }}
+			    {{ form.object_pk }}
+			    {{ form.timestamp }}
+			    {{ form.security_hash }}
+
+			    <input type="hidden" name="next" value="{{ snippet.get_absolute_url }}">
+			    <input type="submit" value="{% trans "Post" %}" id="id_submit">
+		    </form>
+		{% else %}
+		    <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

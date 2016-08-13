@@ -1,0 +1,27 @@
+{% load i18n endless %}
+{% paginate snippets %}
+{% for snippet in snippets %}
+	<div class="snippet">
+		<h3>
+			<a href="{% url 'snippet-view' snippet.slug %}">{{ snippet.get_title }}</a>
+			<span>
+				{% trans "by" %} <a href="{{ self_url }}#">{{ snippet.get_author }}</a>,
+				<a href="{{ self_url }}?languages={{ snippet.language.name }}">{{ snippet.language.name }}</a>,
+				{{ snippet.date }},
+				<a href="{% url 'snippet.views.edit' snippet.slug %}">{% trans "edit" %}</a>,
+				<a href="{% url 'snippet.views.delete' snippet.slug %}">{% trans "delete" %}</a>
+			</span>
+		</h3>
+
+		<p>
+			{{ snippet.short_description }}
+		</p>
+
+		{% if show_code %}
+			<div class="code">
+				{{ snippet.highlighted_content|safe }}
+			</div>
+		{% endif %}
+	</div>
+{% endfor %}
+{% show_more %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ profile_user.username }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>{{ profile_user.username }}</h2>
+<dl>
+	<dt>{% trans "Public snippets" %}:</dt>
+	<dd><a href="{% url 'snippet-browse' %}?users={{ profile_user.username }}">{{ public_snippet_cnt }}</a></dd>
+</dl>
+{% endblock %}

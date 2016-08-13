@@ -1,0 +1,454 @@
+@blue: #00628B;
+@white: #E6E6DC;
+@green: #81A594;
+@black: #232729;
+@page_width: 1200px;
+
+html, body {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+}
+
+.stripe {
+  background-color: @blue;
+  border-bottom: 5px solid @green;
+  height: 90px;
+  text-align: center;
+}
+
+.header {
+  width: @page_width;
+  margin: 0 auto;
+
+  h1 {
+    padding: 30px 0 0 10px;
+    margin: 0;
+    float: left;
+    font-size: 28px;
+    font-weight: normal;
+
+    a {
+      color: @white;
+      text-decoration: none;
+    }
+
+    a span {
+      color: @green;
+    }
+  }
+
+  div {
+    width: 980px;
+    float: right;
+
+    #menu {
+      margin: 0;
+      padding: 38px 0 0 0;
+      font-size: 18px;
+    }
+
+    #menu {
+      float: left;
+      font-weight: 300;
+
+      li {
+        display: block;
+        float: left;
+        margin: 0 10px 0 10px;
+
+        a {
+          color: @white;
+          text-decoration: none;
+        }
+      }
+    }
+
+    #login-box {
+
+    }
+
+    #login-box {
+      margin: 0;
+      padding: 32px 0 0 0;
+      font-size: 18px;
+      font-weight: 300;
+      float: right;
+
+      li {
+        display: block;
+        float: left;
+        margin: 0 10px 0 10px;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      .button {
+        width: 140px;
+        height: 25px;
+        padding: 5px 0 0 0;
+      }
+
+      .button.login {
+        background-color: @white;
+
+        a {
+          color: @blue;
+        }
+
+        .rounded-corners(5px);
+      }
+
+      .button.register {
+        background-color: @green;
+
+        a {
+          color: @white;
+        }
+
+        .rounded-corners(5px);
+      }
+
+      .link {
+        padding-top: 4px;
+
+        a {
+          color: @white;
+        }
+      }
+    }
+  }
+}
+
+#page {
+  text-align: left;
+  margin: 0 auto;
+  width: @page_width;
+  z-index: 10;
+}
+
+#content {
+  padding: 20px 10px 20px 10px;
+}
+
+//form.labels {
+//  label {
+//    display: block;
+//    width: 150px;
+//    text-align: right;
+//    float: left;
+//    margin: 0 15px 0 0;
+//  }
+//
+//  div {
+//    margin: 0;
+//    padding: 0;
+//  }
+//}
+
+form.table {
+  td.label {
+    width: 200px;
+    text-align: right;
+    padding: 0 10px 0 0;
+  }
+
+  td {
+    input, textarea, select {
+      width: 100%;
+      padding: 5px;
+      .rounded-corners(5px);
+    }
+
+    input[type="radio"] {
+      width: auto;
+    }
+
+    input[type="range"] {
+      width: 70%;
+    }
+
+    input[type="submit"], input[type="reset"], input.cancel, .button {
+      width: auto;
+      border: none;
+      color: @white;
+      padding: 6px 40px 6px 40px;
+      font-size: 16px;
+      .rounded-corners(5px);
+    }
+
+    input[type="submit"] {
+      background-color: @blue;
+    }
+
+    input[type="reset"], input.cancel {
+      background-color: @green;
+    }
+  }
+}
+
+#snippet-form {
+  textarea {
+    width: 100%;
+    height: 100%;
+  }
+
+  td.file {
+    padding-left: 20px;
+  }
+
+  ul#id_accessibility {
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: block;
+      list-style-type: none;
+      float: left;
+      width: 25%;
+    }
+
+    input[type="radio"] {
+      background-image: url('/static/img/radio.png');
+    }
+  }
+}
+
+.snippet {
+  color: @black;
+
+  .snippet-header {
+    .snippet-title {
+      float: left;
+
+      h2 {
+        color: @blue;
+        font-size: 24px;
+        font-weight: normal;
+        margin: 10px 0 0 0;
+
+        span, a {
+          color: @black;
+        }
+      }
+    }
+  }
+
+  .snippet-metadata {
+    float: right;
+    margin: 10px 0 0 0;
+    text-align: right;
+
+    .score-inner {
+      font-size: 22px;
+      float: right;
+      width: 75px;
+    }
+
+    p {
+      margin: 10px 0 10px 0;
+      padding: 0;
+    }
+
+    .value {
+      float: left;
+      margin-right: 10px;
+    }
+
+    .rating {
+      a{
+        display: block;
+        float: left;
+        text-decoration: none;
+        padding: 0 8px 0 8px;
+        color: @white;
+      }
+
+      .minus {
+        background-color: @blue;
+      }
+
+      .plus {
+        background-color: darkred;
+      }
+    }
+
+    .tags a {
+      color: @blue;
+    }
+  }
+
+  .rating-only {
+    width: 75px;
+  }
+
+  .dates {
+    font-style: italic;
+  }
+
+  .actions, .dates {
+    a {
+      color: @black;
+    }
+  }
+
+  @comment_height: 60px;
+
+  .comments {
+    h3 {
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    textarea {
+      width: 500px;
+      height: @comment_height;
+      .rounded-corners(5px);
+      float: left;
+    }
+
+    input[type="submit"] {
+      width: @comment_height+6;
+      height: @comment_height+6;
+      border: none;
+      background-color: @blue;
+      color: @white;
+      margin-left: 6px;
+      .rounded-corners(5px);
+    }
+  }
+}
+
+#footer {
+  height: 60px;
+  text-align: center;
+  border: none;
+
+  p {
+    width: @page_width;
+    text-align: right;
+    background-color: @blue;
+    color: @white;
+    padding: 20px 0 0 0;
+    margin: 0 auto;
+  }
+
+  a {
+    color: @white;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.filters table {
+  width: 100%;
+
+  td {
+    width: 250px;
+
+    input {
+      width: 100%;
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+    }
+
+    @txt_width: 110px;
+
+    textarea {
+      height: @txt_width;
+    }
+
+    select[multiple="multiple"] {
+      height: @txt_width + 15px;
+    }
+  }
+
+  td.label {
+    width: 90px;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  td.submit {
+    text-align: right;
+
+    input {
+      margin: 0 0 0 20px;
+    }
+
+    a {
+      color: @black;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.browse {
+  h3 {
+    float: left;
+    margin: 0 0 10px 0;
+    padding: 10px 0 0 0;
+    font-size: 18px;
+    font-weight: normal;
+
+    a {
+      color: @blue;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    span a {
+      text-decoration: underline;
+      color: @black;
+    }
+    span a:hover {
+      text-decoration: none;
+    }
+  }
+
+  p.date {
+    float: right;
+    padding: 10px 0 0 0;
+    margin: 0;
+  }
+
+  .description {
+    float: left;
+  }
+}
+
+.cleaner {
+	clear: both;
+}
+
+#id_honeypot {
+    display: none;
+}
+
+.rounded-corners (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.zero-indent {
+  margin: 0;
+  padding: 0;
+}
+
+hr {
+  border: 1px solid #dddddd;
+}

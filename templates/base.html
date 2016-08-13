@@ -1,0 +1,80 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,500,300,600,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}jquery-autosuggest/css/autoSuggest.css">
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/pygments.css">
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+
+		<script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/init.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}jquery-autosuggest/js/jquery.autoSuggest.minified.js"></script>
+
+		{% block css %}
+		{% endblock %}
+
+		{% block js %}
+		{% endblock %}
+
+		<script type="text/javascript" src="{{ STATIC_URL }}js/snippet.js"></script>
+
+		<title>{% block title %}HaveSnippet{% endblock %}</title>
+	</head>
+	<body>
+		<div class="stripe">
+			<div class="header">
+				<h1><a href="{% url 'snippet.views.paste' %}"><span>Have</span>Snippet</a></h1>
+
+				<div>
+					<ul id="menu">
+						<li><a href="{% url 'snippet.views.paste' %}">{% trans "New snippet" %}</a></li>
+						{% if user.is_authenticated %}
+							<li><a href="{% url 'snippet-browse-my' %}">{% trans "My snippets" %}</a></li>
+						{% endif %}
+						<li><a href="{% url 'snippet-browse-featured' %}">{% trans "Featured" %}</a></li>
+						{% if user.is_authenticated %}
+							<li><a href="{% url 'snippet-browse-bookmarks' %}">{% trans "Bookmarks" %}</a></li>
+						{% endif %}
+						<li><a href="{% url 'snippet-browse' %}">{% trans "Browse" %}</a></li>
+						<li><a href="{% url 'api.views.about' %}">{% trans "API" %}</a></li>
+					</ul>
+					<ul id="login-box">
+						{% if user.is_authenticated %}
+							<li class="button register"><a href="{% url 'snippet.views.profile' %}">{% trans "Settings" %}</a></li>
+							<li class="link"><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
+						{% else %}
+							<li class="button login"><a href="{% url 'django.contrib.auth.views.login' %}">{% trans "Login" %}</a></li>
+							<li class="button register"><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
+						{% endif %}
+					</ul>
+				</div>
+
+				<br class="cleaner">
+			</div>
+		</div>
+
+		<div id="page">
+			{% if messages %}
+			<ul class="messages">
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+			{% endif %}
+
+			<div id="content">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+
+		<div id="footer" class="stripe">
+			<p>
+				{% trans "Powered by" %} <a href="http://www.havefun.cz/projects/havesnippet/">HaveSnippet</a>
+				&copy; 2013 Jakub Skokan, {% trans "designed by" %} Aleš Kocur
+			</p>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+{% load i18n %}
+{% csrf_token %}
+
+{% if form.non_field_errors %}
+	<ul class="errorlist">
+		{% for error in form.non_field_errors %}
+			<li>{{ error }}</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+
+{% for f in form.hidden_fields %}
+	{{ f }}
+{% endfor %}
+
+{% for f in form.visible_fields %}
+	{% if f.errors %}
+		{{ f.errors }}
+	{% endif %}
+
+	{% if f.name == "honeypot" %}
+		<div style="display:none;">
+	{% endif %}
+
+	<label for="id_{{ f.html_name }}" class="{% if f.field.required %}required{% endif %}">
+		{% trans f.label %}
+	</label>
+
+	<div class="field">
+		{{ f }}
+	</div>
+
+	{% if f.help_text %}
+		<p class="help_text">{{ f.help_text|safe }}</p>
+	{% endif %}
+
+	<br>
+
+	{% if f.name == "honeypot" %}
+		</div>
+	{% endif %}
+{% endfor %}

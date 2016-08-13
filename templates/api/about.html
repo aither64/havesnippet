@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load i18n absolute_url %}
+
+{% block title %}API | {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>{% trans "API description" %}</h2>
+<p>{% trans "All commands have these parameters:" %}</p>
+
+<dl>
+	<dt>format</dt>
+	<dd>{% trans "json or plain; optional, defaults to plain" %}</dd>
+
+	<dt>api_key</dt>
+	<dd>{% trans "API key generated in account details, required if anonymouse access is disabled" %}</dd>
+</dl>
+
+<h3>{% trans "Create new snippet" %}</h3>
+<p>POST <code>{% absolute_url 'api-paste' %}</code></p>
+
+<h4>{% trans "Parameters" %}</h4>
+<p>{% trans "All parameters except content are optional." %}</p>
+<dl>
+	<dt>title</dt>
+	<dd>{% trans "title of snippet" %}</dd>
+
+	<dt>short_description</dt>
+	<dd>{% trans "short description, max 150 chars" %}</dd>
+
+	<dt>full_description</dt>
+	<dd>{% trans "full description formatted in markdown" %}</dd>
+
+	<dt>language</dt>
+	<dd>
+		<p>{% trans "language, defaults to plain text" %}</p>
+		<p>{% trans "Possible values:" %} {{ langs|join:", " }}</p>
+	</dd>
+
+	<dt>content</dt>
+	<dd>{% trans "the snippet itself" %}</dd>
+
+	<dt>accessibility</dt>
+	<dd>{% trans "0 - public, 1 - unlisted, 2 - logger users only, 3 - private; defaults to unlisted" %}</dd>
+
+	<dt>expiration</dt>
+	<dd>{% trans "timestamp in UTC, defaults to now + 30 minutes" %}</dd>
+
+	<dt>tags</dt>
+	<dd>{% trans "comma separated list of tags" %}</dd>
+
+	<dt>nick</dt>
+	<dd>{% trans "used when api_key is not provided" %}</dd>
+</dl>
+
+<h4>{% trans "Return value" %}</h4>
+<p>URL to the new snippet.</p>
+
+
+<h3>{% trans "List languages" %}</h3>
+<p>GET <code>{% absolute_url 'api-languages' %}</code></p>
+
+
+<h3>{% trans "List tags" %}</h3>
+<p>GET <code>{% absolute_url 'api-tags' %}</code></p>
+
+
+<h3>{% trans "Detect language" %}</h3>
+<p>POST <code>{% absolute_url 'api-detect-language' %}</code></p>
+
+<h4>{% trans "Parameters" %}</h4>
+<p>{% trans "At least one parameter is required." %}</p>
+<dl>
+	<dt>filename</dt>
+	<dd>{% trans "filename to be identified" %}</dd>
+
+	<dt>text</dt>
+	<dd>{% trans "text to be identified" %}</dd>
+</dl>
+
+<h4>{% trans "Return value" %}</h4>
+<p>{% trans "The name of detected language" %}</p>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Edit snippet" %} | {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>{%  trans "Edit snippet" %}</h2>
+
+<form action="{% url 'snippet.views.edit' snippet.slug %}" method="post" class="table">
+	{% csrf_token %}
+	<table>
+		{{ form }}
+		<tr>
+			<td colspan="2"><input type="submit" value="Save"></td>
+		</tr>
+	</table>
+</form>
+{% endblock %}
