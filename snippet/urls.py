@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^(?P<code>[a-zA-Z0-9]+)/$', SnippetView.as_view(), name='snippet_view'),
     url(r'^(?P<code>[a-zA-Z0-9]+)/download/$', DownloadSnippetView.as_view(), name='snippet_download'),
     url(r'^(?P<code>[a-zA-Z0-9]+)/raw/$', RawSnippetView.as_view(), name='snippet_raw'),
+    url(r'^(?P<code>[a-zA-Z0-9]+)/embed/$', EmbedSnippetView.as_view(), name='snippet_embed'),
     url(r'^(?P<code>[a-zA-Z0-9]+)/edit/$', edit, name='snippet_edit'),
     url(r'^(?P<code>[a-zA-Z0-9]+)/delete/$', delete, name='snippet_delete'),
     url(r'^(?P<code>[a-zA-Z0-9]+)/delete/confirm/$', delete_confirm, name='snippet_delete_confirm'),

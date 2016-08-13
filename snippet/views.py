@@ -108,6 +108,11 @@ class RawSnippetView(SnippetView):
         return HttpResponse(snippet.content, content_type='text/plain')
 
 
+class EmbedSnippetView(SnippetView):
+    def view(self, request, snippet):
+        return render(request, 'snippet/embed.html', {'snippet': snippet})
+
+
 @login_required
 def profile(request):
     return render(request, 'snippet/profile.html', {

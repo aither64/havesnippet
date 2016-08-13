@@ -30,7 +30,7 @@
 				<a href="javascript:alert('FIXME!')">{% trans "Maximize" %}</a>,
 				<a href="{% url 'snippet_download' snippet.slug %}">{% trans "Download" %}</a>,
 				<a href="{% url 'snippet_raw' snippet.slug %}">{% trans "Raw" %}</a>,
-				<a href="javascript:alert('FIXME!')">{% trans "Embed" %}</a>
+				<a href="{% url 'snippet_embed' snippet.slug %}">{% trans "Embed" %}</a>
 			</p>
 		</div>
 		<div class="snippet-metadata">
