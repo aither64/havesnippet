@@ -1,14 +1,14 @@
-{% load i18n endless %}
+{% load i18n el_pagination_tags %}
 {% paginate snippets %}
 {% for snippet in snippets %}
 	<div class="snippet">
 		<div>
 			<h3>
-				<a href="{% url 'snippet-view' snippet.slug %}">{{ snippet.get_title }}</a>
+				<a href="{% url 'snippet_view' snippet.slug %}">{{ snippet.get_title }}</a>
 				<span>
 					{% if snippet.user %}
 						{% trans "by" %}
-						<a href="{% url 'snippet.views.user_profile' snippet.user.username %}">{{ snippet.user.username }}</a>
+						<a href="{% url 'snippet_user_profile' snippet.user.username %}">{{ snippet.user.username }}</a>
 					{% endif %}
 
 					{{ snippet.file_name }}
@@ -16,8 +16,8 @@
 					{% trans "in" %}
 					<a href="{{ self_url }}?language={{ snippet.language.pk }}">{{ snippet.language.name }}</a>
 					{% if user.is_authenticated and snippet.user == user %}
-						, <a href="{% url 'snippet.views.edit' snippet.slug %}">{% trans "edit" %}</a>,
-						<a href="{% url 'snippet.views.delete' snippet.slug %}">{% trans "delete" %}</a>
+						, <a href="{% url 'snippet_edit' snippet.slug %}">{% trans "edit" %}</a>,
+						<a href="{% url 'snippet_delete' snippet.slug %}">{% trans "delete" %}</a>
 					{% endif %}
 				</span>
 			</h3>

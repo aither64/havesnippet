@@ -4,7 +4,7 @@
 {% block title %}{% trans "New paste" %} | {{ block.super }}{% endblock %}
 
 {% block content %}
-<form action="{% url 'snippet.views.paste' %}" method="post" id="snippet-form" class="table">
+<form action="{% url 'snippet_new' %}" method="post" id="snippet-form" class="table">
 	{% csrf_token %}
 	<table>
 		<tr>

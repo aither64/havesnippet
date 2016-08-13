@@ -16,7 +16,7 @@
 </dl>
 
 <h3>{% trans "Create new snippet" %}</h3>
-<p>POST <code>{% absolute_url 'api-paste' %}</code></p>
+<p>POST <code>{% absolute_url 'api_paste' %}</code></p>
 
 <h4>{% trans "Parameters" %}</h4>
 <p>{% trans "All parameters except content are optional." %}</p>
@@ -48,11 +48,11 @@
 
 
 <h3>{% trans "List languages" %}</h3>
-<p>GET <code>{% absolute_url 'api-languages' %}</code></p>
+<p>GET <code>{% absolute_url 'api_languages' %}</code></p>
 
 
 <h3>{% trans "Detect language" %}</h3>
-<p>POST <code>{% absolute_url 'api-detect-language' %}</code></p>
+<p>POST <code>{% absolute_url 'api_detect_language' %}</code></p>
 
 <h4>{% trans "Parameters" %}</h4>
 <p>{% trans "At least one parameter is required." %}</p>

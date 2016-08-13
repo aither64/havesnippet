@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models, IntegrityError
 from django.utils.translation import ugettext_lazy as _
-from markdown import markdown
 from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
 from pygments.lexers import get_lexer_by_name, guess_lexer_for_filename, get_lexer_for_filename
@@ -19,7 +18,7 @@ class Language(models.Model):
     class Meta:
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_use_count(self):
@@ -89,7 +88,7 @@ class Snippet(models.Model):
     expiration = models.DateTimeField(_('expiration'), blank=True, null=True,
                                       help_text=_("leave empty to keep forever"))
 
-    def __unicode__(self):
+    def __str__(self):
         return "{0}: {1}".format(self.slug, self.title)
 
     def save(self, *args, **kwargs):

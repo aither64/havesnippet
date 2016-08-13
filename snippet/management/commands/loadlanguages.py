@@ -93,16 +93,15 @@ ALL = (
 
 
 class Command(BaseCommand):
-    args = '<all | required>'
     help = 'Loads a set of languages to database'
 
-    def handle(self, *args, **options):
-        if len(args) != 1:
-            raise CommandError("Required argument 'all' or 'required'")
+    def add_arguments(self, parser):
+        parser.add_argument('language_set', choices=['all', 'required'])
 
+    def handle(self, *args, **options):
         langs = ()
 
-        if args[0] == 'required':
+        if options['language_set'] == 'required':
             langs = REQUIRED
         else:
             langs = sorted((REQUIRED + ALL)[1:], key=itemgetter(2))
@@ -113,7 +112,7 @@ class Command(BaseCommand):
 
             try:
                 Language.objects.create(language_code=lang[0], slug=slug, name=lang[2])
-                print lang[2]
+                print(lang[2])
             except IntegrityError:
                 continue
 

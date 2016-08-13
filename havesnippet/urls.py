@@ -1,10 +1,8 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
+from django.contrib import admin, auth
 
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
-admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
     # url(r'^$', 'HaveSnippet.views.home', name='home'),
     # url(r'^HaveSnippet/', include('HaveSnippet.foo.urls')),
@@ -13,8 +11,8 @@ urlpatterns = patterns('',
 
     url(r'^api/', include('api.urls')),
 
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
+    url(r'^accounts/login/$', auth.views.login, name='login'),
+    url(r'^accounts/logout/$', auth.views.logout, name='logout'),
     #url(r'^accounts/profile/$', ''),
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -24,4 +22,4 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^', include('snippet.urls')),  # must be last
-)
+]

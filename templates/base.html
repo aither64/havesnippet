@@ -1,15 +1,14 @@
-{% load i18n %}
+{% load i18n static %}
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 
 		<link href='http://fonts.googleapis.com/css?family=Raleway:400,500,300,600,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/pygments.css">
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+		<link rel="stylesheet" href="{% static 'css/pygments.css' %}">
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-		<script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.js"></script>
-		<script type="text/javascript" src="{{ STATIC_URL }}js/init.js"></script>
+		<script type="text/javascript" src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
 
 		{% block css %}
 		{% endblock %}
@@ -17,30 +16,30 @@
 		{% block js %}
 		{% endblock %}
 
-		<script type="text/javascript" src="{{ STATIC_URL }}js/snippet.js"></script>
+		<script type="text/javascript" src="{% static 'js/snippet.js' %}"></script>
 
 		<title>{% block title %}HaveSnippet{% endblock %}</title>
 	</head>
 	<body>
 		<div class="stripe">
 			<div class="header">
-				<h1><a href="{% url 'snippet.views.paste' %}"><span>Have</span>Snippet</a></h1>
+				<h1><a href="{% url 'snippet_new' %}"><span>Have</span>Snippet</a></h1>
 
 				<div>
 					<ul id="menu">
-						<li><a href="{% url 'snippet.views.paste' %}">{% trans "New snippet" %}</a></li>
+						<li><a href="{% url 'snippet_new' %}">{% trans "New snippet" %}</a></li>
 						{% if user.is_authenticated %}
-							<li><a href="{% url 'snippet-browse-my' %}">{% trans "My snippets" %}</a></li>
+							<li><a href="{% url 'snippet_browse_mine' %}">{% trans "My snippets" %}</a></li>
 						{% endif %}
-						<li><a href="{% url 'snippet-browse' %}">{% trans "Browse" %}</a></li>
-						<li><a href="{% url 'api.views.about' %}">{% trans "API" %}</a></li>
+						<li><a href="{% url 'snippet_browse' %}">{% trans "Browse" %}</a></li>
+						<li><a href="{% url 'api_about' %}">{% trans "API" %}</a></li>
 					</ul>
 					<ul id="login-box">
 						{% if user.is_authenticated %}
-							<li class="button register"><a href="{% url 'snippet.views.profile' %}">{% trans "Settings" %}</a></li>
-							<li class="link"><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
+							<li class="button register"><a href="{% url 'snippet_my_profile' %}">{% trans "Settings" %}</a></li>
+							<li class="link"><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
 						{% else %}
-							<li class="button login"><a href="{% url 'django.contrib.auth.views.login' %}">{% trans "Login" %}</a></li>
+							<li class="button login"><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
 							<li class="button register"><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
 						{% endif %}
 					</ul>

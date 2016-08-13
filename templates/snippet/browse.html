@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% load i18n endless %}
+{% load i18n static el_pagination_tags %}
 
 {% block title %}Browse | {{ block.super }}{% endblock %}
 
 {% block js %}
-<script type="text/javascript" src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+<script type="text/javascript" src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
 
 <script type="text/javascript">
 	$(document).ready(function(){

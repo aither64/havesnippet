@@ -1,11 +1,7 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{{ snippet.title }} | {{ block.super }}{% endblock %}
-
-{% block js %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.blockUI.js"></script>
-{% endblock %}
 
 {% block content %}
 <div class="snippet">
@@ -25,15 +21,15 @@
 				, {% trans "updated" %} {{ snippet.update_date }}
 				{% endif %}
 				{% if user.is_authenticated and snippet.user == user %}
-					, <a href="{% url 'snippet.views.edit' snippet.slug %}">{% trans "edit" %}</a>,
-					<a href="{% url 'snippet.views.delete' snippet.slug %}">{% trans "delete" %}</a>
+					, <a href="{% url 'snippet_edit' snippet.slug %}">{% trans "edit" %}</a>,
+					<a href="{% url 'snippet_delete' snippet.slug %}">{% trans "delete" %}</a>
 				{% endif %}
 			</p>
 
 			<p class="actions">
 				<a href="javascript:alert('FIXME!')">{% trans "Maximize" %}</a>,
-				<a href="{% url 'snippet-download' snippet.slug %}">{% trans "Download" %}</a>,
-				<a href="{% url 'snippet-raw' snippet.slug %}">{% trans "Raw" %}</a>,
+				<a href="{% url 'snippet_download' snippet.slug %}">{% trans "Download" %}</a>,
+				<a href="{% url 'snippet_raw' snippet.slug %}">{% trans "Raw" %}</a>,
 				<a href="javascript:alert('FIXME!')">{% trans "Embed" %}</a>
 			</p>
 		</div>

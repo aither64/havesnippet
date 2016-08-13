@@ -25,7 +25,7 @@ def key_add(request):
 
     if form.is_valid():
         form.save()
-        return redirect('snippet.views.profile')
+        return redirect('snippet_my_profile')
 
     return render(request, 'snippet/profile.html', {
         'api_keys': AuthKey.objects.filter(user=request.user),
@@ -37,7 +37,7 @@ def key_add(request):
 def key_delete(request, key):
     get_object_or_404(AuthKey, user=request.user, key=key).delete()
 
-    return redirect('snippet.views.profile')
+    return redirect('snippet_my_profile')
 
 
 class BaseView(View):

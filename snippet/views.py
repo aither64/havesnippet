@@ -26,7 +26,7 @@ def paste(request):
 
         if form.is_valid():
             form.save()
-            return redirect('snippet-view', code=form.instance.slug)
+            return redirect('snippet_view', code=form.instance.slug)
 
     else:
         form = SnippetForm(request.user)
@@ -46,7 +46,7 @@ def edit(request, code):
 
         if form.is_valid():
             form.save()
-            return redirect('snippet-view', code=form.instance.slug)
+            return redirect('snippet_view', code=form.instance.slug)
 
     else:
         form = SnippetForm(request.user, instance=snippet)
@@ -73,7 +73,7 @@ def delete_confirm(request, code):
 
     snippet.delete()
 
-    return redirect('snippet.views.profile')
+    return redirect('snippet_my_profile')
 
 
 class SnippetView(View):

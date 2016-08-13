@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.forms import widgets
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-from models import Snippet, Language
+from .models import Snippet, Language
 
 
 class SnippetForm(forms.ModelForm):

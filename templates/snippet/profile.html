@@ -21,7 +21,7 @@
 		<td>{{ key.description }}</td>
 		<td>{{ key.use_count }}&times;</td>
 		<td>{{ key.last_use }}</td>
-		<td><a href="{% url 'api.views.key_delete' key.key %}">{% trans "delete" %}</a></td>
+		<td><a href="{% url 'api_key_delete' key.key %}">{% trans "delete" %}</a></td>
 	</tr>
 	{% empty %}
 	<tr>
@@ -31,7 +31,7 @@
 </table>
 
 <h4>{% trans "Add API key" %}</h4>
-<form action="{% url 'api.views.key_add' %}" method="post">
+<form action="{% url 'api_key_add' %}" method="post">
 	{% csrf_token %}
 	<table>
 		{{ key_form }}
