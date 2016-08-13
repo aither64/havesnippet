@@ -6,10 +6,6 @@
 {% block js %}
 <script type="text/javascript" src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
 
-{% if show_code %}
-	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.blockUI.js"></script>
-{% endif %}
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.endlessPaginate({
