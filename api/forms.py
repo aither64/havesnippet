@@ -3,7 +3,6 @@ from django import forms
 from django.conf import settings
 from django.db.models import F
 from django.utils.timezone import now, utc
-from taggit.forms import TagField
 from api.models import AuthKey
 from snippet.models import Snippet, Language
 
@@ -45,7 +44,6 @@ class ApiForm(forms.Form):
 
 class SnippetForm(forms.ModelForm):
     language = forms.CharField(max_length=50)
-    tags = TagField(required=False)
     expiration = forms.IntegerField(min_value=0)
 
     class Meta:

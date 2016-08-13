@@ -7,7 +7,6 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import View
-from taggit.models import Tag
 from api.forms import SnippetForm, ApiForm, AuthKeyAddForm, LanguageDetectForm
 from api.models import AuthKey
 from snippet.models import Language, Snippet
@@ -143,27 +142,6 @@ class LanguagesView(BaseView):
 
         for lang in self.qs:
             res.write("{0}={1}\n".format(lang.language_code, lang.name))
-
-        return res
-
-
-class TagsView(BaseView):
-    def prepare(self, params):
-        self.qs = Tag.objects.all()
-
-    def json(self):
-        ret = []
-
-        for tag in self.qs:
-            ret.append(tag.name)
-
-        return HttpResponse(json.dumps(ret))
-
-    def plain(self):
-        res = HttpResponse()
-
-        for tag in self.qs:
-            res.write("{0}\n".format(tag.name))
 
         return res
 

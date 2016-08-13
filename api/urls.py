@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from api.views import PasteView, LanguagesView, TagsView, DetectLanguageView
+from api.views import PasteView, LanguagesView, DetectLanguageView
 
 urlpatterns = patterns('api.views',
     url(r'^$', 'about'),
@@ -8,6 +8,5 @@ urlpatterns = patterns('api.views',
     url(r'^paste/$', PasteView.as_view(), name='api-paste'),
     url(r'^view/(?P<code>[a-zA-Z0-9]+)/$', PasteView.as_view(), name='api-view'),
     url(r'^languages/$', LanguagesView.as_view(), name='api-languages'),
-    url(r'^tags/$', TagsView.as_view(), name='api-tags'),
     url(r'^detect-language/$', DetectLanguageView.as_view(), name='api-detect-language'),
 )
