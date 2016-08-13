@@ -39,6 +39,10 @@
 		</div>
 		<div class="snippet-metadata">
 			<p>{% trans "Language" %}: {{ snippet.language.name }}</p>
+
+			{% if snippet.file_name %}
+				<p>{% trans "File" %}: {{	snippet.file_name }}</p>
+			{% endif %}
 		</div>
 		<br class="cleaner">
 	</div>

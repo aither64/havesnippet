@@ -97,7 +97,9 @@ class SnippetView(View):
 class DownloadSnippetView(SnippetView):
     def view(self, request, snippet):
         res = HttpResponse(snippet.content, content_type='text/plain')
-        res['Content-Disposition'] = 'attachment; filename={0}.txt'.format(snippet.slug)
+        res['Content-Disposition'] = 'attachment; filename={0}'.format(
+            snippet.file_name or (snippet.slug + '.txt')
+        )
         return res
 
 

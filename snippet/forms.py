@@ -17,9 +17,10 @@ class SnippetForm(forms.ModelForm):
 
     class Meta:
         model = Snippet
-        fields = ['title', 'language', 'content', 'accessibility', 'expiration']
+        fields = ['title', 'file_name', 'language', 'content', 'accessibility', 'expiration']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': _('My cool snippet')}),
+            'file_name': forms.TextInput(attrs={'placeholder': _('File name, including extension')}),
             'content': forms.Textarea(attrs={'placeholder': _('Paste code here')}),
             'accessibility': forms.RadioSelect(),
         }
@@ -39,7 +40,10 @@ class SnippetForm(forms.ModelForm):
             or not data["language"] \
             or data["language"].language_code == "autodetect") \
            and "content" in data:
-            data["language"] = Language.guess_language(text=data["content"])
+            data["language"] = Language.guess_language(
+                filename=data["file_name"],
+                text=data["content"],
+            )
 
         return data
 

@@ -9,7 +9,7 @@ admin.site.register(Language, LanguageAdmin)
 
 
 class SnippetAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', 'pub_date', 'accessibility', 'expiration')
+    list_display = ('title', 'file_name', 'user', 'pub_date', 'accessibility', 'expiration')
     list_filter = ('accessibility', 'language')
     date_hierarchy = 'pub_date'
     search_fields = ('title',)

@@ -77,6 +77,7 @@ class Snippet(models.Model):
     PRIVATE = 3
 
     title = models.CharField(_('title'), max_length=255, blank=True)
+    file_name = models.CharField(_('file name'), max_length=255, blank=True)
     language = models.ForeignKey(Language)
     content = models.TextField(_('code'))
     highlighted_content = models.TextField(_('highlighted code'))
