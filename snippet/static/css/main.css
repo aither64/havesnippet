@@ -193,11 +193,6 @@ form.table td input.cancel {
   margin: 10px 0 0 0;
   text-align: right;
 }
-.snippet .snippet-metadata .score-inner {
-  font-size: 22px;
-  float: right;
-  width: 75px;
-}
 .snippet .snippet-metadata p {
   margin: 10px 0 10px 0;
   padding: 0;
@@ -205,22 +200,6 @@ form.table td input.cancel {
 .snippet .snippet-metadata .value {
   float: left;
   margin-right: 10px;
-}
-.snippet .snippet-metadata .rating a {
-  display: block;
-  float: left;
-  text-decoration: none;
-  padding: 0 8px 0 8px;
-  color: #E6E6DC;
-}
-.snippet .snippet-metadata .rating .minus {
-  background-color: #00628B;
-}
-.snippet .snippet-metadata .rating .plus {
-  background-color: darkred;
-}
-.snippet .rating-only {
-  width: 75px;
 }
 .snippet .dates {
   font-style: italic;

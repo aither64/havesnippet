@@ -38,7 +38,6 @@ class SnippetForm(forms.ModelForm):
 
 ORDER_BY = (
     ('latest', _('Latest')),
-    ('highest-rated', _('Highest rated')),
     ('oldest', _('Oldest')),
 )
 
@@ -82,8 +81,6 @@ class FilterForm(forms.Form):
         if self._filter_by('order_by'):
             if self.cleaned_data['order_by'] == 'latest':
                 qs = qs.order_by('-pub_date', '-id')
-            elif self.cleaned_data['order_by'] == 'highest-rated':
-                qs = qs.order_by('-rating', '-pub_date', '-id')
             else:
                 qs = qs.order_by('id')
         else:

@@ -16,6 +16,4 @@ urlpatterns = patterns('snippet.views',
     url(r'^(?P<code>[a-zA-Z0-9]+)/delete/confirm/$', 'delete_confirm'),
     url(r'^(?P<code>[a-zA-Z0-9]+)/bookmark/$', 'bookmark_snippet'),
     url(r'^(?P<code>[a-zA-Z0-9]+)/bookmark/delete/$', 'bookmark_snippet_delete'),
-    url(r'^(?P<code>[a-zA-Z0-9]+)/rate/like/$', 'rate', {'value': 1}, name='rate-like'),
-    url(r'^(?P<code>[a-zA-Z0-9]+)/rate/dislike/$', 'rate', {'value': -1}, name='rate-dislike'),
 )

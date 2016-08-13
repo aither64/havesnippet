@@ -3,10 +3,8 @@
 		setupSnippetForm();
 		hideAdvancedFilters();
 		ajaxBookmark();
-		ajaxRating();
 
 		window.ajaxBookmark = ajaxBookmark;
-		window.ajaxRating = ajaxRating;
 	});
 
 	function setupSnippetForm() {
@@ -155,32 +153,6 @@
 	                event.preventDefault();
                 });
 			});
-
-			event.preventDefault();
-		});
-	}
-
-	function ajaxRating() {
-		$(".snippet .rating a").click(function(event){
-			var a = this;
-
-			$.blockUI({ message: "<p>Remote call in progress...</p>" });
-
-			$.ajax({
-				url: this.href,
-				cache: false,
-	        }).done(function(data){
-                $.blockUI({ message: (data != "ERROR" ? "<p>Rating saved.</p>" : "<p>Error occured</p>") });
-
-                if(data != "ERROR") {
-                    var score_inner = $(a).parent().parent();
-                    $(a).parent().remove();
-
-					score_inner.find("p.value").text(data);
-                }
-
-                setTimeout($.unblockUI, 1000);
-            });
 
 			event.preventDefault();
 		});

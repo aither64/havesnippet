@@ -87,8 +87,6 @@ class Snippet(models.Model):
     accessibility = models.SmallIntegerField(_('accessibility'), choices=ACCESSIBILITY, default=1)
     expiration = models.DateTimeField(_('expiration'), blank=True, null=True,
                                       help_text=_("leave empty to keep forever"))
-    rating = models.IntegerField(_('score'), default=0)
-    ratings = models.ManyToManyField(User, related_name='snippet_ratings', through='SnippetRating')
 
     def __unicode__(self):
         return "{0}: {1}".format(self.slug, self.title)
@@ -122,23 +120,9 @@ class Snippet(models.Model):
     def get_absolute_url(self):
         return reverse('snippet-view', kwargs={'code': self.slug})
 
-    def rate(self, user, value):
-        SnippetRating.objects.create(user=user, snippet=self, rating=value)
-        self.rating += value
-
     @staticmethod
     def generate_slug():
         return gen_string(size=8)
-
-
-class SnippetRating(models.Model):
-    user = models.ForeignKey(User, related_name='user_evaluations')
-    snippet = models.ForeignKey(Snippet, related_name='snippet_evaluations')
-    rating = models.SmallIntegerField(_('rating'))
-    date = models.DateTimeField(_('date'), auto_now_add=True)
-
-    class Meta:
-        unique_together = (('user', 'snippet'))
 
 
 class Bookmark(models.Model):

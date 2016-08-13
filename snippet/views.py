@@ -93,7 +93,6 @@ class SnippetView(View):
 
         if request.user.is_authenticated():
             context['user_bookmarks'] = [b.snippet for b in Bookmark.objects.filter(owner=request.user).exclude(snippet=None)]
-            context['user_ratings'] = request.user.snippet_ratings.all()
 
         return render(request, 'snippet/view.html', context)
 
@@ -155,7 +154,6 @@ class BrowseView(View):
 
         if context['show_code'] and request.user.is_authenticated():
             context['user_bookmarks'] = [b.snippet for b in Bookmark.objects.filter(owner=request.user).exclude(snippet=None)]
-            context['user_ratings'] = request.user.snippet_ratings.all()
 
         context.update(self.context())
 
@@ -246,24 +244,3 @@ def bookmark_snippet_delete(request, code):
     messages.success(request, _("Bookmark deleted."))
 
     return redirect(return_url(request, reverse('snippet-browse-bookmarks')))
-
-
-@login_required
-def rate(request, code, value):
-    snippet = get_object_or_404(Snippet, slug=code)
-    snippet.rate(request.user, value)
-
-    try:
-        snippet.save()
-    except IntegrityError:
-        if request.is_ajax():
-            return HttpResponse("ERROR")
-
-        messages.error(request, _("You have already rated this snippet."))
-    else:
-        if request.is_ajax():
-            return HttpResponse(snippet.rating)
-
-        messages.success(request, _("Rating saved."))
-
-    return redirect(return_url(request, reverse('snippet-view', kwargs={'code': snippet.slug})))

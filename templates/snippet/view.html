@@ -52,20 +52,6 @@
 			</p>
 		</div>
 		<div class="snippet-metadata">
-			<div class="score-outer">
-				<div class="score-inner">
-					<p class="value">{{ snippet.rating }}</p>
-					{% if user.is_authenticated and snippet not in user_ratings %}
-						<p class="rating">
-							<a class="minus" href="{% url 'rate-dislike' snippet.slug %}">-</a>
-							<a class="plus" href="{% url 'rate-like' snippet.slug %}">+</a>
-						</p>
-					{% endif %}
-					<br class="cleaner">
-				</div>
-				<br class="cleaner">
-			</div>
-
 			<p>{% trans "Language" %}: {{ snippet.language.name }}</p>
 		</div>
 		<br class="cleaner">
