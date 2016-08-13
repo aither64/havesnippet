@@ -2,9 +2,10 @@ from datetime import datetime
 from django import forms
 from django.conf import settings
 from django.db.models import F
-from django.utils.timezone import now, utc
+from django.utils import timezone
+from datetime import timedelta
 from api.models import AuthKey
-from snippet.models import Snippet, Language
+from snippet.models import Snippet, Language, ACCESSIBILITY
 
 
 class AuthKeyAddForm(forms.ModelForm):
@@ -43,27 +44,56 @@ class ApiForm(forms.Form):
 
 
 class SnippetForm(forms.ModelForm):
-    language = forms.CharField(max_length=50)
-    expiration = forms.IntegerField(min_value=0)
+    language = forms.CharField(max_length=50, required=False)
+    expiration = forms.IntegerField(min_value=0, required=False)
+    accessibility = forms.IntegerField(
+        min_value=0, max_value=len(ACCESSIBILITY)-1,
+        required=False
+    )
 
     class Meta:
         model = Snippet
         fields = ['title', 'file_name', 'language', 'content', 'accessibility', 'expiration']
 
-    def clean_language(self):
-        lang = self.cleaned_data["language"]
-
-        try:
-            lang = Language.objects.get(slug=lang)
-        except Language.DoesNotExist:
-            raise forms.ValidationError("language does not exists")
-
-        return lang
-
     def clean_expiration(self):
-        expire = self.cleaned_data["expiration"]
+        expire = self.cleaned_data.get("expiration")
 
-        return datetime.fromtimestamp(expire, utc)
+        now = timezone.now()
+
+        if expire:
+            expire_date = datetime.fromtimestamp(expire, timezone.utc)
+
+            if expire_date > now:
+                return expire_date
+
+        return now + timedelta(minutes=30)
+
+    def clean(self):
+        data = self.cleaned_data
+
+        # Handle language
+        name = data.get("language")
+
+        if not name or name == "autodetect":
+            data['language'] = Language.guess_language(
+                filename=data.get("file_name"),
+                text=data["content"]
+            )
+
+        else:
+            try:
+                data['language'] = Language.objects.get(slug=name)
+
+            except Language.DoesNotExist:
+                raise forms.ValidationError("language does not exists")
+
+        # Accessibility
+        access = data.get("accessibility")
+
+        if access != 0 and not access:
+            data["accessibility"] = 1
+
+        return data
 
 
 class LanguageDetectForm(forms.Form):

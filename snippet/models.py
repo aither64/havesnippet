@@ -118,7 +118,7 @@ class Snippet(models.Model):
         return self.title if len(self.title) else _("Untitled")
 
     def get_absolute_url(self):
-        return reverse('snippet-view', kwargs={'code': self.slug})
+        return reverse('snippet_view', kwargs={'code': self.slug})
 
     @staticmethod
     def generate_slug():
