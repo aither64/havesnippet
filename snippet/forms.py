@@ -8,7 +8,12 @@ from models import Snippet, Language
 
 
 class SnippetForm(forms.ModelForm):
-    language = forms.ModelChoiceField(label=_("Language"), queryset=Language.objects.all(), initial="autodetect")
+    language = forms.ModelChoiceField(
+        label=_("Language"),
+        queryset=Language.objects.all(),
+        empty_label=_('Auto-detect'),
+        required=False
+    )
 
     class Meta:
         model = Snippet
@@ -30,7 +35,10 @@ class SnippetForm(forms.ModelForm):
     def clean(self):
         data = self.cleaned_data
 
-        if data["language"].language_code == "autodetect" and "content" in data:
+        if ("language" not in data \
+            or not data["language"] \
+            or data["language"].language_code == "autodetect") \
+           and "content" in data:
             data["language"] = Language.guess_language(text=data["content"])
 
         return data
