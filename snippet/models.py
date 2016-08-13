@@ -99,7 +99,11 @@ class Snippet(models.Model):
 
 
         lexer = get_lexer_by_name(self.language.language_code)
-        formatter = HtmlFormatter(linenos=True)
+        formatter = HtmlFormatter(
+            linenos=True,
+            lineanchors='L',
+            anchorlinenos=True,
+        )
         self.highlighted_content = highlight(self.content, lexer, formatter)
 
         if is_new:

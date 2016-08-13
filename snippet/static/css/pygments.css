@@ -1,3 +1,5 @@
+.highlight td.linenos a { color: #232729; text-decoration: none; }
+.highlight td.linenos a:hover { text-decoration: underline }
 .highlight td.code { padding-left: 5px }
 .highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f8f8f8; }
