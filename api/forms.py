@@ -134,13 +134,13 @@ class SnippetForm(forms.ModelForm):
 
 
 class LanguageDetectForm(forms.Form):
-    filename = forms.CharField(max_length=1000, required=False)
+    file_name = forms.CharField(max_length=1000, required=False)
     text = forms.CharField(max_length=65535, required=False)
 
     def clean(self):
         data = self.cleaned_data
 
         if len(data) == 0:
-            raise forms.ValidationError("specify filename, text, or both to be identified")
+            raise forms.ValidationError("specify file name, text, or both to be identified")
 
         return data

@@ -169,7 +169,11 @@ class DetectLanguageView(BaseView):
         form = LanguageDetectForm(params)
 
         if form.is_valid():
-            lang = Language.guess_language(create=False, **form.cleaned_data)
+            lang = Language.guess_language(
+                create=False,
+                filename=form.cleaned_data.get('file_name'),
+                text=form.cleaned_data.get('text')
+            )
             self.ret = {'language': lang.language_code}
 
         else:
