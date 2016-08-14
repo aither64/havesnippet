@@ -87,6 +87,8 @@ class SnippetView(View):
         return self.view(request, snippet)
 
     def view(self, request, snippet):
+        snippet.accessed('views')
+
         context = {
             'snippet': snippet,
         }
@@ -96,6 +98,8 @@ class SnippetView(View):
 
 class DownloadSnippetView(SnippetView):
     def view(self, request, snippet):
+        snippet.accessed('downloads')
+
         res = HttpResponse(snippet.content, content_type='text/plain')
         res['Content-Disposition'] = 'attachment; filename={0}'.format(
             snippet.file_name or (snippet.slug + '.txt')
@@ -105,16 +109,22 @@ class DownloadSnippetView(SnippetView):
 
 class RawSnippetView(SnippetView):
     def view(self, request, snippet):
+        snippet.accessed('raw_views')
+
         return HttpResponse(snippet.content, content_type='text/plain')
 
 
 class EmbedSnippetView(SnippetView):
     def view(self, request, snippet):
+        snippet.accessed('embed_views')
+
         return render(request, 'snippet/embed.html', {'snippet': snippet})
 
 
 class MaxSnippetView(SnippetView):
     def view(self, request, snippet):
+        snippet.accessed('views')
+
         return render(request, 'snippet/view.html', {
             'snippet': snippet,
             'snippet_max': True,

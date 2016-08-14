@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models, IntegrityError
+from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
 from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
@@ -88,6 +89,11 @@ class Snippet(models.Model):
     expiration = models.DateTimeField(_('expiration'), blank=True, null=True,
                                       help_text=_("leave empty to keep forever"))
 
+    views = models.PositiveIntegerField(_('views'), default=0)
+    raw_views = models.PositiveIntegerField(_('raw views'), default=0)
+    embed_views = models.PositiveIntegerField(_('embed views'), default=0)
+    downloads = models.PositiveIntegerField(_('downloads'), default=0)
+
     def __str__(self):
         return "{0}: {1}".format(self.slug, self.title)
 
@@ -117,6 +123,9 @@ class Snippet(models.Model):
 
         else:
             super(Snippet, self).save(*args, **kwargs)
+
+    def accessed(self, type):
+        Snippet.objects.filter(pk=self.pk).update(**{type: F(type) + 1})
 
     def get_title(self):
         return self.title if len(self.title) else _("Untitled")
