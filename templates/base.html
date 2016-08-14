@@ -40,7 +40,10 @@
 							<li class="link"><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
 						{% else %}
 							<li class="button login"><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
-							<li class="button register"><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
+
+							{% if settings.registration_open %}
+								<li class="button register"><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
+							{% endif %}
 						{% endif %}
 					</ul>
 				</div>
