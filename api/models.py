@@ -18,11 +18,18 @@ class AuthKey(models.Model):
         if self.pk is None:
             self.key = self.generate_key()
 
+            tries = 0
+
             while True:
                 try:
                     super(AuthKey, self).save(*args, **kwargs)
                     break
-                except IntegrityError:
+                except IntegrityError as e:
+                    tries += 1
+
+                    if tries > 5:
+                        raise e
+
                     self.key = self.generate_key()
 
         else:
