@@ -7,7 +7,7 @@
 <form action="{% url 'snippet_delete_confirm' snippet.slug %}" method="get">
 	<p>{% trans "Do you really want to delete this snippet?" %}</p>
 	<input type="submit" value="{% trans "Delete" %}">
-	<a href="{% url 'snippet-view' snippet.slug %}">{% trans "cancel" %}</a>
+	<a href="{% url 'snippet_view' snippet.slug %}">{% trans "cancel" %}</a>
 </form>
 
 {{ block.super }}
