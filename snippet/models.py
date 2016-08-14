@@ -135,7 +135,7 @@ class Snippet(models.Model):
         Snippet.objects.filter(pk=self.pk).update(**{type: F(type) + 1})
 
     def get_title(self):
-        return self.title if len(self.title) else _("Untitled")
+        return self.title if self.title else self.slug
 
     def get_absolute_url(self):
         return reverse('snippet_view', kwargs={'code': self.slug})
