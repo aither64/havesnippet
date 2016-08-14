@@ -27,10 +27,14 @@
 
 				<div>
 					<ul id="menu">
-						<li><a href="{% url 'snippet_new' %}">{% trans "New snippet" %}</a></li>
+						{% if settings.allow_paste %}
+							<li><a href="{% url 'snippet_new' %}">{% trans "New snippet" %}</a></li>
+						{% endif %}
+
 						{% if user.is_authenticated %}
 							<li><a href="{% url 'snippet_browse_mine' %}">{% trans "My snippets" %}</a></li>
 						{% endif %}
+
 						<li><a href="{% url 'snippet_browse' %}">{% trans "Browse" %}</a></li>
 						<li><a href="{% url 'api_about' %}">{% trans "API" %}</a></li>
 					</ul>

@@ -18,8 +18,8 @@ from snippet import settings
 
 
 def paste(request):
-    if not settings.SNIPPET_PASTE_PUBLIC:
-        raise PermissionDenied
+    if not settings.SNIPPET_PASTE_PUBLIC and not request.user.is_authenticated():
+        return redirect('snippet_browse')
 
     if request.method == "POST":
         form = SnippetForm(request.user, request.POST)
