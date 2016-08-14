@@ -7,7 +7,7 @@
 <h2>{% trans "Account settings" %}</h2>
 
 <h3>{% trans "API keys" %}</h3>
-<table>
+<table class="api-keys">
 	<tr>
 		<th>{% trans "Key" %}</th>
 		<th>{% trans "Description" %}</th>
@@ -31,12 +31,13 @@
 </table>
 
 <h4>{% trans "Add API key" %}</h4>
-<form action="{% url 'api_key_add' %}" method="post">
+<form action="{% url 'api_key_add' %}" method="post" class="table inline">
 	{% csrf_token %}
 	<table>
-		{{ key_form }}
 		<tr>
-			<td colspan="2"><input type="submit" value="{% trans "Add" %}"></td>
+			<td>{{ key_form.description.label_tag }}</td>
+			<td>{{ key_form.description }}</td>
+			<td><input type="submit" value="{% trans "Add" %}"></td>
 		</tr>
 	</table>
 </form>
