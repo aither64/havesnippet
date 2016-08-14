@@ -15,7 +15,7 @@
 	<dd>{% trans "API key generated in account details, required if anonymouse access is disabled" %}</dd>
 </dl>
 
-<h3>{% trans "Create new snippet" %}</h3>
+<h3>{% trans "Create a new snippet" %}</h3>
 <p>POST <code>{% absolute_url 'api_paste' %}</code></p>
 
 <h4>{% trans "Parameters" %}</h4>
@@ -37,10 +37,10 @@
 	<dd>{% trans "the snippet itself" %}</dd>
 
 	<dt>accessibility</dt>
-	<dd>{% trans "0 - public, 1 - unlisted, 2 - logger users only, 3 - private; defaults to unlisted" %}</dd>
+	<dd>{% trans "0 - public, 1 - unlisted, 2 - logged users only, 3 - private; defaults to unlisted" %}</dd>
 
 	<dt>expiration</dt>
-	<dd>{% trans "timestamp in UTC, defaults to now + 30 minutes" %}</dd>
+	<dd>{% trans "timestamp, defaults to now + 30 minutes" %}</dd>
 </dl>
 
 <h4>{% trans "Return value" %}</h4>
