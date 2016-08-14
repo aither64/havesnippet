@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}{{ snippet.title }} | {{ block.super }}{% endblock %}
+{% block title %}
+{{ snippet.get_title }}
+
+{% if snippet.file_name %}({{ snippet.file_name }}){% endif %}
+, {{ snippet.language }} | {{ block.super }}
+{% endblock %}
 
 {% block content %}
 <div class="snippet">
