@@ -65,6 +65,9 @@ class SnippetForm(forms.ModelForm):
     def clean_accessibility(self):
         access = self.cleaned_data.get("accessibility")
 
+        if not access:
+            access = 1
+
         if not self.user and access > 1:
             raise forms.ValidationError('accessibility must be 0 or 1')
 
