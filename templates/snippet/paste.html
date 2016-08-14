@@ -45,4 +45,10 @@
 		</tr>
 	</table>
 </form>
+
+<script type="text/javascript">
+setupSnippetForm(
+	{% if settings.max_expiration %}{{ settings.max_expiration }}{% else %}false{% endif %}
+);
+</script>
 {% endblock %}

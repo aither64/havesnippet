@@ -71,17 +71,20 @@ class SnippetForm(forms.ModelForm):
         return access
 
     def clean_expiration(self):
-        expire = self.cleaned_data.get("expiration")
+        expire = self.establish_expiration()
 
-        now = timezone.now()
+        limit = settings.SNIPPET_PUBLIC_MAX_EXPIRATION
 
-        if expire:
-            expire_date = datetime.fromtimestamp(expire, timezone.utc)
+        if limit is False:
+            return expire
 
-            if expire_date > now:
-                return expire_date
+        if (not self.user and not expire) \
+           or (expire - timezone.now()) > timedelta(seconds=limit):
+            raise forms.ValidationError(
+                "expiration must be less than {0} seconds from now".format(limit)
+            )
 
-        return now + timedelta(minutes=30)
+        return expire
 
     def clean(self):
         data = self.cleaned_data
@@ -109,6 +112,22 @@ class SnippetForm(forms.ModelForm):
             data["accessibility"] = 1
 
         return data
+
+    def establish_expiration(self):
+        expire = self.cleaned_data.get("expiration")
+
+        now = timezone.now()
+
+        if expire:
+            expire_date = datetime.fromtimestamp(expire, timezone.utc)
+
+            if expire_date > now:
+                return expire_date
+
+        elif 'expiration' in self.data:
+            return None
+
+        return now + timedelta(minutes=30)
 
 
 class LanguageDetectForm(forms.Form):

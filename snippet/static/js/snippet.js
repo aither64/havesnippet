@@ -1,10 +1,10 @@
 (function($) {
 	$(document).ready(function(){
-		setupSnippetForm();
 		hideAdvancedFilters();
 	});
 
-	function setupSnippetForm() {
+	function setupSnippetForm(max_expiration) {
+		console.log("max_expiration = ", max_expiration);
 		var form = $("#snippet-form");
 
 		if(!form.length)
@@ -12,11 +12,11 @@
 
 		// Expiration slider
 		var td = $("#id_expiration").parent();
-		td.find("*").hide();
+		td.find("input").hide();
 
 		var slider = $("<p>");
 		var value = $("<p>").css({"text-align": "center"});
-		var values = [
+		var allValues = [
 			[60*30, "30 minutes"],
 			[60*60, "1 hour"],
 			[60*60*12, "12 hours"],
@@ -25,8 +25,21 @@
 			[60*60*24*30, "1 month"],
 			[null, "never"],
 		];
+		var values;
 
-		$("<span>").text("30 minutes").appendTo(slider);
+		if (max_expiration > 0) {
+			values = [];
+
+			for (var i = 0; i < allValues.length; i++) {
+				if (allValues[i][0] > max_expiration)
+					break;
+
+				values.push(allValues[i]);
+			}
+
+		} else values = allValues;
+
+		$("<span>").text(values[0][1]).appendTo(slider);
 
 		function updateValue() {
 			value.text(values[this.value][1]);
@@ -35,15 +48,15 @@
 		var range = $("<input>")
 				.attr("type", "range")
 				.attr("min", "0")
-				.attr("max", "6")
-				.attr("value", "2")
+				.attr("max", values.length - 1)
+				.attr("value", 2 % (values.length - 1))
 				.attr("id", "snippet_expiration")
 				.change(updateValue)
 				.on('input', updateValue);
 
 		slider.append(range);
 
-		$("<span>").text("never").appendTo(slider);
+		$("<span>").text(values[values.length-1][1]).appendTo(slider);
 
 		td.append(slider);
 		td.append(value);
@@ -87,4 +100,6 @@
 			+ ":" + ("0" + d.getMinutes().toString()).slice(-2)
 			+ ":" + ("0" + d.getSeconds().toString()).slice(-2);
 	}
+
+	window.setupSnippetForm = setupSnippetForm;
 }(jQuery));

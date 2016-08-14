@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.forms import widgets
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
+from snippet import settings
 from .models import Snippet, Language
 
 
@@ -28,12 +29,30 @@ class SnippetForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super(SnippetForm, self).__init__(*args, **kwargs)
 
+        self.user = user
+
         if user.is_authenticated():
             self.instance.user = user
         else:
             self.fields['accessibility'].choices = self.fields['accessibility'].choices[0:2]
 
         self.fields['expiration'].initial = now() + timedelta(minutes=30)
+
+    def clean_expiration(self):
+        expire = self.cleaned_data.get("expiration", now() + timedelta(minutes=30))
+
+        limit = settings.SNIPPET_PUBLIC_MAX_EXPIRATION
+
+        if limit is False:
+            return expire
+
+        if (not self.user and not expire) \
+           or (expire - now()) > timedelta(seconds=limit):
+            raise forms.ValidationError(
+                "expiration must be less than {0} seconds from now".format(limit)
+            )
+
+        return expire
 
     def clean(self):
         data = self.cleaned_data
