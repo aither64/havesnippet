@@ -73,7 +73,7 @@ def delete_confirm(request, code):
 
     snippet.delete()
 
-    return redirect('snippet_my_profile')
+    return redirect('snippet_browse_mine')
 
 
 class SnippetView(View):
