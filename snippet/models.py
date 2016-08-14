@@ -113,12 +113,19 @@ class Snippet(models.Model):
         self.highlighted_content = highlight(self.content, lexer, formatter)
 
         if is_new:
+            tries = 0
+
             while True:
                 try:
                     super(Snippet, self).save(*args, **kwargs)
                     break
 
-                except IntegrityError:
+                except IntegrityError as e:
+                    tries += 1
+
+                    if tries > 5:
+                        raise e
+
                     self.slug = self.generate_slug()
 
         else:
