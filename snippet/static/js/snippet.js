@@ -28,15 +28,18 @@
 
 		$("<span>").text("30 minutes").appendTo(slider);
 
+		function updateValue() {
+			value.text(values[this.value][1]);
+		}
+
 		var range = $("<input>")
 				.attr("type", "range")
 				.attr("min", "0")
 				.attr("max", "6")
 				.attr("value", "2")
 				.attr("id", "snippet_expiration")
-				.change(function(){
-					value.text(values[this.value][1]);
-				});
+				.change(updateValue)
+				.on('input', updateValue);
 
 		slider.append(range);
 
@@ -44,6 +47,8 @@
 
 		td.append(slider);
 		td.append(value);
+
+		updateValue.call(range.get(0));
 
 		form.submit(function(event){
 			var now = Date.now();
