@@ -12,3 +12,9 @@ SNIPPET_PUBLIC_MAX_EXPIRATION = getattr(
     'SNIPPET_PUBLIC_MAX_EXPIRATION',
     7 * 24 * 60 * 60
 )
+
+SNIPPET_SLUG_LENGTH = getattr(
+    settings,
+    'SNIPPET_SLUG_LENGTH',
+    8
+)

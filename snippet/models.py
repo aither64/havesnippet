@@ -9,6 +9,7 @@ from pygments.lexers import get_lexer_by_name, guess_lexer_for_filename, get_lex
 from pygments.lexers import guess_lexer
 import pygments.util
 from snippet.utils import gen_string
+from snippet import settings
 
 
 class Language(models.Model):
@@ -142,4 +143,4 @@ class Snippet(models.Model):
 
     @staticmethod
     def generate_slug():
-        return gen_string(size=8)
+        return gen_string(size=settings.SNIPPET_SLUG_LENGTH)
