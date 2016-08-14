@@ -4,14 +4,15 @@
 {% block title %}{% trans "Edit snippet" %} | {{ block.super }}{% endblock %}
 
 {% block content %}
-<h2>{%  trans "Edit snippet" %}</h2>
+<h2>{% trans "Edit snippet" %}</h2>
 
-<form action="{% url 'snippet_edit' snippet.slug %}" method="post" class="table">
+<form action="{% url 'snippet_edit' snippet.slug %}" method="post" class="table snippet-edit">
 	{% csrf_token %}
 	<table>
 		{{ form }}
 		<tr>
-			<td colspan="2"><input type="submit" value="Save"></td>
+			<td></td>
+			<td><input type="submit" value="Save"></td>
 		</tr>
 	</table>
 </form>

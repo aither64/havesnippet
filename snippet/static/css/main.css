@@ -318,6 +318,23 @@ table.api-keys {
 table.api-keys td {
   padding: 5px;
 }
+.snippet-edit table {
+  width: 100%;
+}
+.snippet-edit table tr td:first-child {
+  width: 100px;
+}
+.snippet-edit table textarea {
+  width: 100%;
+  height: 300px;
+}
+.snippet-edit table ul {
+  margin: 0;
+  padding: 0;
+}
+.snippet-edit table li {
+  list-style-type: none;
+}
 .cleaner {
   clear: both;
 }
