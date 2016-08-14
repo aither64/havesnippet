@@ -143,4 +143,7 @@ class Snippet(models.Model):
 
     @staticmethod
     def generate_slug():
-        return gen_string(size=settings.SNIPPET_SLUG_LENGTH)
+        return gen_string(
+            size=settings.SNIPPET_SLUG_LENGTH,
+            chars=settings.SNIPPET_SLUG_CHARS
+        )

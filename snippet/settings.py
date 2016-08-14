@@ -1,4 +1,5 @@
 from django.conf import settings
+import string
 
 
 SNIPPET_PASTE_PUBLIC = getattr(
@@ -17,4 +18,10 @@ SNIPPET_SLUG_LENGTH = getattr(
     settings,
     'SNIPPET_SLUG_LENGTH',
     8
+)
+
+SNIPPET_SLUG_CHARS = getattr(
+    settings,
+    'SNIPPET_SLUG_CHARS',
+    string.ascii_lowercase + string.ascii_uppercase + string.digits + '_+:-'
 )
