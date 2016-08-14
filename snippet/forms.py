@@ -43,10 +43,10 @@ class SnippetForm(forms.ModelForm):
 
         limit = settings.SNIPPET_PUBLIC_MAX_EXPIRATION
 
-        if limit is False:
+        if limit is False or self.user:
             return expire
 
-        if (not self.user and not expire) \
+        if not expire \
            or (expire - now()) > timedelta(seconds=limit):
             raise forms.ValidationError(
                 "expiration must be less than {0} seconds from now".format(limit)
