@@ -154,6 +154,11 @@ html, body {
 //  }
 //}
 
+input, textarea, select {
+  padding: 5px;
+  .rounded-corners(5px);
+}
+
 form.table {
   td.label {
     width: 200px;
@@ -162,10 +167,8 @@ form.table {
   }
 
   td {
-    input, textarea, select {
+    input {
       width: 100%;
-      padding: 5px;
-      .rounded-corners(5px);
     }
 
     input[type="radio"] {
@@ -192,6 +195,12 @@ form.table {
     input[type="reset"], input.cancel {
       background-color: @green;
     }
+  }
+}
+
+form.login {
+  td {
+    padding: 5px;
   }
 }
 

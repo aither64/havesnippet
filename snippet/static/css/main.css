@@ -112,21 +112,23 @@ body {
 #content {
   padding: 20px 10px 20px 10px;
 }
-form.table td.label {
-  width: 200px;
-  text-align: right;
-  padding: 0 10px 0 0;
-}
-form.table td input,
-form.table td textarea,
-form.table td select {
-  width: 100%;
+input,
+textarea,
+select {
   padding: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
+}
+form.table td.label {
+  width: 200px;
+  text-align: right;
+  padding: 0 10px 0 0;
+}
+form.table td input {
+  width: 100%;
 }
 form.table td input[type="radio"] {
   width: auto;
@@ -155,6 +157,9 @@ form.table td input[type="submit"] {
 form.table td input[type="reset"],
 form.table td input.cancel {
   background-color: #81A594;
+}
+form.login td {
+  padding: 5px;
 }
 #snippet-form table {
   width: 90%;
