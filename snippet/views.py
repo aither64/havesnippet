@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -15,6 +14,7 @@ from api.models import AuthKey
 from snippet.forms import SnippetForm, FilterForm
 from snippet.models import Snippet
 from snippet.utils import return_url
+from snippet import settings
 
 
 def paste(request):

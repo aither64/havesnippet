@@ -1,11 +1,11 @@
 from datetime import datetime
 from django import forms
-from django.conf import settings
 from django.db.models import F
 from django.utils import timezone
 from datetime import timedelta
 from api.models import AuthKey
 from snippet.models import Snippet, Language, ACCESSIBILITY
+from snippet import settings
 
 
 class AuthKeyAddForm(forms.ModelForm):
