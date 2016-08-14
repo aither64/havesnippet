@@ -11,7 +11,6 @@ urlpatterns = [
     url(r'^browse/$', BrowseView.as_view(), name='snippet_browse'),
     url(r'^browse/my/$', MySnippetsView.as_view(), name='snippet_browse_mine'),
     url(r'^accounts/profile/$', profile, name='snippet_my_profile'),
-    url(r'^users/(?P<username>.+)/$', user_profile, name='snippet_user_profile'),
     url(r'^(?P<code>{0})/$'.format(slug), SnippetView.as_view(), name='snippet_view'),
     url(r'^(?P<code>{0})/download/$'.format(slug), DownloadSnippetView.as_view(), name='snippet_download'),
     url(r'^(?P<code>{0})/raw/$'.format(slug), RawSnippetView.as_view(), name='snippet_raw'),

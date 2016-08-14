@@ -139,15 +139,6 @@ def profile(request):
     })
 
 
-def user_profile(request, username):
-    user = get_object_or_404(User, username=username)
-
-    return render(request, "snippet/user.html", {
-        'profile_user': user,
-        'public_snippet_cnt': Snippet.objects.filter(user=user, accessibility=Snippet.PUBLIC).count(),
-    })
-
-
 class BrowseView(View):
     http_method_names = ['get']
     template = "snippet/browse.html"

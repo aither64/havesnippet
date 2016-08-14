@@ -8,7 +8,7 @@
 				<span>
 					{% if snippet.user %}
 						{% trans "by" %}
-						<a href="{% url 'snippet_user_profile' snippet.user.username %}">{{ snippet.user.username }}</a>
+						{{ snippet.user.username }}
 					{% endif %}
 
 					{{ snippet.file_name }}
