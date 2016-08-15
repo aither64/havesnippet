@@ -15,6 +15,8 @@ Features
 * Simple API, authentication with API keys
 * `CLI client`_
 
+See it running at https://paste.vpsfree.cz.
+
 ------------
 Requirements
 ------------
