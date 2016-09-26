@@ -6,8 +6,8 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 .stripe {
-  background-color: #00628B;
-  border-bottom: 5px solid #81A594;
+  background-color: #1f3959;
+  border-bottom: 5px solid #F6914B;
   height: 90px;
   text-align: center;
 }
@@ -16,7 +16,7 @@ body {
   margin: 0 auto;
 }
 .header h1 {
-  padding: 30px 0 0 10px;
+  padding: 23px 0 0 10px;
   margin: 0;
   float: left;
   font-size: 28px;
@@ -25,9 +25,10 @@ body {
 .header h1 a {
   color: #E6E6DC;
   text-decoration: none;
+  outline: none;
 }
 .header h1 a span {
-  color: #81A594;
+  color: #F6914B;
 }
 .header div {
   width: 980px;
@@ -80,10 +81,10 @@ body {
   border-radius: 5px;
 }
 .header div #login-box .button.login a {
-  color: #00628B;
+  color: #1f3959;
 }
 .header div #login-box .button.register {
-  background-color: #81A594;
+  background-color: #F6914B;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -155,11 +156,11 @@ form.table td .button {
   border-radius: 5px;
 }
 form.table td input[type="submit"] {
-  background-color: #00628B;
+  background-color: #1f3959;
 }
 form.table td input[type="reset"],
 form.table td input.cancel {
-  background-color: #81A594;
+  background-color: #F6914B;
 }
 form.table.inline input[type="submit"] {
   margin-left: 10px;
@@ -200,7 +201,7 @@ form.table.inline input[type="submit"] {
   float: left;
 }
 .snippet .snippet-header .snippet-title h2 {
-  color: #00628B;
+  color: #1f3959;
   font-size: 24px;
   font-weight: normal;
   margin: 10px 0 0 0;
@@ -240,7 +241,7 @@ form.table.inline input[type="submit"] {
 #footer p {
   width: 1200px;
   text-align: right;
-  background-color: #00628B;
+  background-color: #1f3959;
   color: #E6E6DC;
   padding: 20px 0 0 0;
   margin: 0 auto;
@@ -294,7 +295,7 @@ form.table.inline input[type="submit"] {
   font-weight: normal;
 }
 .browse h3 a {
-  color: #00628B;
+  color: #1f3959;
   text-decoration: none;
 }
 .browse h3 a:hover {
