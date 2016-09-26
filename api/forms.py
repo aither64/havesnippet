@@ -95,7 +95,7 @@ class SnippetForm(forms.ModelForm):
         # Handle language
         name = data.get("language")
 
-        if not name or name == "autodetect":
+        if name == "autodetect":
             data['language'] = Language.guess_language(
                 filename=data.get("file_name"),
                 text=data["content"]
@@ -103,7 +103,7 @@ class SnippetForm(forms.ModelForm):
 
         else:
             try:
-                data['language'] = Language.objects.get(slug=name)
+                data['language'] = Language.objects.get(slug=(name or 'text'))
 
             except Language.DoesNotExist:
                 raise forms.ValidationError("language does not exists")
