@@ -9,6 +9,7 @@ from .models import Snippet, Language
 
 
 class SnippetForm(forms.ModelForm):
+    url= forms.CharField(label=_("Leave this field empty"), required=False)
     language = forms.ModelChoiceField(
         label=_("Language"),
         queryset=Language.objects.all(),
@@ -36,6 +37,14 @@ class SnippetForm(forms.ModelForm):
             self.fields['accessibility'].choices = self.fields['accessibility'].choices[0:2]
 
         self.fields['expiration'].initial = now() + timedelta(minutes=30)
+
+    def clean_url(self):
+        url = self.cleaned_data.get("url", False)
+
+        if url:
+            raise forms.ValidationError("The URL field is for bots, leave it empty");
+
+        return None
 
     def clean_expiration(self):
         expire = self.cleaned_data.get("expiration", now() + timedelta(minutes=30))

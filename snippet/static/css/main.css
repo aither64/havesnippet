@@ -190,6 +190,9 @@ form.table.inline input[type="submit"] {
 #snippet-form ul#id_accessibility input[type="radio"] {
   background-image: url('/static/img/radio.png');
 }
+#snippet-form tr.url {
+  display: none;
+}
 .snippet {
   color: #232729;
 }
