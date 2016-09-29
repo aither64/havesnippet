@@ -43,7 +43,7 @@ class SnippetForm(forms.ModelForm):
 
         limit = settings.SNIPPET_PUBLIC_MAX_EXPIRATION
 
-        if limit is False or self.user:
+        if limit is False or self.user.is_authenticated():
             return expire
 
         if not expire \
@@ -55,7 +55,7 @@ class SnippetForm(forms.ModelForm):
         return expire
 
     def clean(self):
-        data = self.cleaned_data
+        data = super(SnippetForm, self).clean()
 
         if ("language" not in data \
             or not data["language"] \
