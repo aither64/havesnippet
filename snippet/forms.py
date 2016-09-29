@@ -12,7 +12,6 @@ class SnippetForm(forms.ModelForm):
     language = forms.ModelChoiceField(
         label=_("Language"),
         queryset=Language.objects.all(),
-        empty_label=_('Auto-detect'),
         required=False
     )
 
@@ -57,10 +56,13 @@ class SnippetForm(forms.ModelForm):
     def clean(self):
         data = super(SnippetForm, self).clean()
 
-        if ("language" not in data \
-            or not data["language"] \
-            or data["language"].language_code == "autodetect") \
-           and "content" in data:
+        if "content" not in data:
+            return data
+
+        if "language" not in data or not data["language"]:
+            data["language"] = Language.objects.get(language_code='text')
+
+        elif data["language"].language_code == "autodetect":
             data["language"] = Language.guess_language(
                 filename=data["file_name"],
                 text=data["content"],
