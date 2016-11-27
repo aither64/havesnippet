@@ -65,12 +65,12 @@
 
 		form.submit(function(event){
 			var now = Date.now();
-			var val = values[$("#snippet_expiration").val()][0] * 1000;
+			var val = values[$("#snippet_expiration").val()][0];
 
-			if(val == null)
+			if(val === null)
 				td.find("#id_expiration").val("");
 			else
-				td.find("#id_expiration").val(formatDate(new Date(now + val)));
+				td.find("#id_expiration").val(formatDate(new Date(now + val*1000)));
 		});
 	}
 
