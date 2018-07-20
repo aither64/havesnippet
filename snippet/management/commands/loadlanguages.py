@@ -89,6 +89,9 @@ ALL = (
     ('console', '', 'Bash session'),
     ('bat', '', 'Bat'),
     ('powershell', '', 'PowerShell'),
+    ('elixir', 'ex', 'Elixir'),
+    ('verilog', 'Verilog'),
+    ('md', '', 'Markdown'),
 )
 
 
