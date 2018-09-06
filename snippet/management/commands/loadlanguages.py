@@ -92,6 +92,7 @@ ALL = (
     ('elixir', 'ex', 'Elixir'),
     ('verilog', 'Verilog'),
     ('md', '', 'Markdown'),
+    ('nix', '', 'Nix'),
 )
 
 
