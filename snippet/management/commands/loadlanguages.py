@@ -90,7 +90,7 @@ ALL = (
     ('bat', '', 'Bat'),
     ('powershell', '', 'PowerShell'),
     ('elixir', 'ex', 'Elixir'),
-    ('verilog', 'Verilog'),
+    ('verilog', '', 'Verilog'),
     ('md', '', 'Markdown'),
     ('nix', '', 'Nix'),
 )
