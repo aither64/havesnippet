@@ -2,7 +2,7 @@
 # See more at: https://github.com/garbas/pypi2nix
 #
 # COMMAND:
-#   pypi2nix -V 3.6 -E mysql -E zlib -E openssl -r requirements.txt
+#   pypi2nix -V 3.6 -E mysql.connector-c -E zlib -E openssl -r requirements.txt
 #
 
 { pkgs ? import <nixpkgs> {}
@@ -29,7 +29,7 @@ let
       };
   };
 
-  commonBuildInputs = with pkgs; [ mysql zlib openssl ];
+  commonBuildInputs = with pkgs; [ mysql.connector-c zlib openssl ];
   commonDoCheck = false;
 
   withPackages = pkgs':
@@ -141,6 +141,7 @@ let
       name = "mysqlclient-1.3.13";
       src = pkgs.fetchurl { url = "https://files.pythonhosted.org/packages/ec/fd/83329b9d3e14f7344d1cb31f128e6dbba70c5975c9e57896815dbb1988ad/mysqlclient-1.3.13.tar.gz"; sha256 = "ff8ee1be84215e6c30a746b728c41eb0701a46ca76e343af445b35ce6250644f"; };
       doCheck = commonDoCheck;
+      nativeBuildInputs = [ pkgs.mysql.connector-c ]; # manual edit
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [ ];
       meta = with pkgs.stdenv.lib; {
